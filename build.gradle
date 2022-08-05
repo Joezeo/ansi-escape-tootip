@@ -1,6 +1,6 @@
 plugins {
-    id 'org.jetbrains.intellij' version '1.8.0'
     id 'java'
+    id 'org.jetbrains.intellij' version '1.8.0'
 }
 
 group 'com.toocol.plugin'
@@ -15,6 +15,11 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
     version = '2021.3.2'
@@ -26,4 +31,21 @@ patchPluginXml {
 }
 test {
     useJUnitPlatform()
+}
+tasks {
+    patchPluginXml {
+        version.set("${project.version}")
+        sinceBuild.set("213")
+        untilBuild.set("223.*")
+    }
+
+    signPlugin {
+        certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
+        privateKey.set(System.getenv("PRIVATE_KEY"))
+        password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
+    }
+
+    publishPlugin {
+        token.set(System.getenv("PUBLISH_TOKEN"))
+    }
 }

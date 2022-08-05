@@ -1,11 +1,10 @@
 <idea-plugin>
     <id>com.toocol.plugin.anis-escape-tooltip</id>
-    <name>Plugin display name here</name>
-    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+    <name>Anis Escape Tooltip</name>
+    <vendor email="joezane.cn@gmail.com" url="http://www.toocol.com">toocol</vendor>
 
     <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+    The tooltip for anis escape code. Extract the parsed anis-escape-code sequence from the String of the editor.<br>
     ]]></description>
 
     <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
@@ -18,5 +17,10 @@
 
     <actions>
         <!-- Add your actions here -->
+        <action id="anis.escape.tooltip.extract" class="com.toocol.plugin.tooltip.ExtractEscapeCodeSequenceAction"
+                text="ExtractEscapeCodeSequence"
+                description="Extract the anis escape code sequence from the String of the editor.">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
     </actions>
 </idea-plugin>
