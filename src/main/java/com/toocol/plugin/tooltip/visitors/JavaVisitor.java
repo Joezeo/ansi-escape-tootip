@@ -3,6 +3,7 @@ package com.toocol.plugin.tooltip.visitors;
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiJavaFile;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,7 @@ public class JavaVisitor extends AbstractAnisEscapeVisitor {
     @Override
     public boolean suitableForFile(@NotNull PsiFile file) {
         logger.warn("suitableForFIle: " + file);
-        return true;
+        return file instanceof PsiJavaFile;
     }
 
     @Override
