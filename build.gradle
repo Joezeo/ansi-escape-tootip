@@ -1,28 +1,42 @@
 String properties(String key) {
     return project.findProperty(key).toString()
 }
+
 String fileProperties(String key) {
     return project.findProperty(key).toString().let { if (it.isNotEmpty()) file(it) else null }
 }
 
 plugins {
-    id 'java'
+    // Java support
+    id("java")
     // gradle-intellij-plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
-    id 'org.jetbrains.intellij' version '1.8.0'
+    id("org.jetbrains.intellij") version "1.8.0"
     // gradle-changelog-plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
     id("org.jetbrains.changelog") version "1.3.1"
 }
 
-group 'com.toocol.plugin'
+group "com.toocol.plugin"
 version = properties("pluginVersion")
+
+String depsDartVersion = properties("depsDartVersion")
+String depsGoVersion = properties("depsGoVersion")
+String depsKotlinVersion = properties("depsKotlinVersion")
+String depsPhpVersion = properties("depsPhpVersion")
+String depsPyVersion = properties("depsPyVersion")
+String depsRubyVersion = properties("depsRubyVersion")
+String depsScalaVersion = properties("depsScalaVersion")
 
 repositories {
     mavenCentral()
+    maven { url = "https://www.jetbrains.com/intellij-repository/releases" }
+    maven { url = "https://www.jetbrains.com/intellij-repository/snapshots" }
+    maven { url = "https://maven-central.storage-download.googleapis.com/repos/central/data/" }
+    maven { url = "https://maven.aliyun.com/nexus/content/groups/public/" }
+    maven { url = "https://repo.eclipse.org/content/groups/releases/" }
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+
 }
 
 java {
@@ -32,7 +46,29 @@ java {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version = '2021.3.2'
+    pluginName.set(properties("pluginName"))
+    version.set(properties("platformVersion"))
+    type.set(properties("platformType"))
+    downloadSources.set(true)
+    instrumentCode.set(false)
+    updateSinceUntilBuild.set(true)
+
+    plugins = [
+            "java",
+            "java-i18n",
+            "DatabaseTools",
+            "Dart:$depsDartVersion",
+            "CSS",
+            "properties",
+            "yaml",
+            "markdown",
+            "Pythonid:$depsPyVersion",
+            "org.jetbrains.plugins.go:$depsGoVersion",
+            "org.jetbrains.kotlin:$depsKotlinVersion",
+            "org.intellij.scala:$depsScalaVersion",
+            "org.jetbrains.plugins.ruby:$depsRubyVersion",
+            "com.jetbrains.php:$depsPhpVersion"
+    ]
 }
 
 changelog {
@@ -42,11 +78,7 @@ changelog {
     itemPrefix.set("-")
     keepUnreleasedSection.set(true)
     unreleasedTerm.set("[Unreleased]")
-//    groups.set(listOf("Features", "Fixes", "Other", "Bump"))
-}
-
-test {
-    useJUnitPlatform()
+    groups = ["Features", "Fixes", "Other", "Bump"]
 }
 
 tasks {
@@ -68,4 +100,11 @@ tasks {
     publishPlugin {
         token.set(System.getenv("PUBLISH_TOKEN"))
     }
+
+//    register("markdownToHtml") {
+//        File input = File("./docs/CHANGELOG.md")
+//        File("./docs/CHANGELOG.html").run {
+//            writeText(markdownToHTML(input.readText()))
+//        }
+//    }
 }
