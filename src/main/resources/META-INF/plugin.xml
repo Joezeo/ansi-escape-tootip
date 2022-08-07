@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.toocol.plugin.anisEscapeTooltip</id>
     <name>Anis Escape Tooltip</name>
-    <vendor email="joezane.cn@gmail.com" url="http://www.toocol.com">toocol</vendor>
+    <vendor email="joezane.cn@gmail.com" url="https://www.toocol.com">TooCol</vendor>
 
     <description><![CDATA[
     The tooltip for anis escape code. <br/>
@@ -16,7 +16,6 @@
     <resource-bundle>messages.AnisEscapeTooltipBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-
         <notificationGroup displayType="BALLOON" id="Anis Escape Sequence Tooltip Notification"/>
 
         <backgroundPostStartupActivity implementation="com.toocol.plugin.tooltip.PluginUpdatesChecker"/>

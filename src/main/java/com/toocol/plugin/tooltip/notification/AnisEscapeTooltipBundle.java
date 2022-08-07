@@ -1,4 +1,4 @@
-package com.toocol.plugin.tooltip;
+package com.toocol.plugin.tooltip.notification;
 
 import com.intellij.DynamicBundle;
 import org.jetbrains.annotations.NotNull;

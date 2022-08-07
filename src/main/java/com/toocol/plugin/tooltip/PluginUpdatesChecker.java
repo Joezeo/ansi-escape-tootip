@@ -2,7 +2,7 @@ package com.toocol.plugin.tooltip;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.startup.StartupActivity;
-import com.toocol.plugin.tooltip.util.AnisEscapeSequenceTooltipNotification;
+import com.toocol.plugin.tooltip.notification.AnisEscapeSequenceTooltipNotification;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
