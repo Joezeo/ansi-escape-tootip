@@ -1,4 +1,4 @@
-package com.toocol.plugin.tooltip.util;
+package com.toocol.plugin.tooltip.notification;
 
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationGroupManager;
@@ -9,7 +9,6 @@ import com.intellij.openapi.ui.popup.Balloon;
 import com.intellij.openapi.wm.WindowManager;
 import com.intellij.ui.BalloonLayoutData;
 import com.intellij.ui.awt.RelativePoint;
-import com.toocol.plugin.tooltip.AnisEscapeTooltipBundle;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
