@@ -6,10 +6,10 @@ package com.toocol.plugin.tooltip.search;
  * @version: 0.0.1
  */
 public enum EscapeCommonPrivateMode implements IEscapeMode {
-    CURSOR_INVISIBLE("25l", "Make cursor invisible."),
-    CURSOR_VISIBLE("25h", "Make cursor visible."),
-    RESTORE_SCREEN("47l", "Restore screen."),
-    SAVE_SCREEN("47h", "Save screen."),
+    CURSOR_INVISIBLE("25l", "Make cursor <b>invisible</b>."),
+    CURSOR_VISIBLE("25h", "Make cursor <b>visible</b>."),
+    RESTORE_SCREEN("47l", "<b>Restore screen</b>."),
+    SAVE_SCREEN("47h", "<b>Save screen</b>."),
     ENABLE_ALTERNATIVE_BUFFER("1049h", "Enables the alternative buffer."),
     DISABLE_ALTERNATIVE_BUFFER("1049l", "Disables the alternative buffer."),
     ;
