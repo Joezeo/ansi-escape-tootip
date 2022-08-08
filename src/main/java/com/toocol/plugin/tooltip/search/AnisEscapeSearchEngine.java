@@ -53,7 +53,7 @@ public class AnisEscapeSearchEngine {
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#keyboard-strings
     private static final Pattern keyBoardStringMode = Pattern.compile("\\\\u001b\\[((\\d{1,3};)(\\d{1,3};)([\"\\w ]+;?))+p");
 
-    public Collection<EscapeSequence> getEscapeAction(PsiElement element) {
+    public synchronized Collection<EscapeSequence> getEscapeAction(PsiElement element) {
         Collection<EscapeSequence> collection = new ArrayList<>();
         var text = element.getText();
 
@@ -70,30 +70,28 @@ public class AnisEscapeSearchEngine {
         }).ifPresent(collection::add);
 
         regexParse(text, colorGraphicsModePattern, matcher -> {
-            logger.warn("Detected!");
-            for (int i = 0; i < matcher.groupCount(); i++) {
-                String group = matcher.group(i);
-                int start = element.getTextRange().getStartOffset() + text.indexOf(group);
-                int end = start + group.length();
+            while (matcher.find()) {
+                String group = matcher.group(0);
+                var start = element.getTextRange().getStartOffset() + matcher.start(0);
+                var end = start + group.length();
                 EscapeSequence escapeSequence = new EscapeSequence(start, end, group);
 
+                group = group.replaceAll("\\\\u001b", "");
                 Matcher numMatcher = numberPattern.matcher(group);
-                if (numMatcher.find()) {
-                    for (int j = 0; j < numMatcher.groupCount(); j++) {
-                        var code = Integer.parseInt(numMatcher.group(j));
-                        if (code < 30) {
-                            // graphics mode
-                            escapeSequence.add(EscapeColorGraphicsMode.codeOf(code));
-                        } else if (code < 50) {
-                            // 8-16 color mode
-                            escapeSequence.add(EscapeColor8To16Mode.codeOf(code));
-                        } else if (code >= 90 && code <= 107) {
-                            // iso color mode
-                            escapeSequence.add(EscapeColorISOMode.codeOf(code));
-                        }
+                while (numMatcher.find()) {
+                    var code = Integer.parseInt(numMatcher.group(0));
+                    if (code < 30) {
+                        // graphics mode
+                        escapeSequence.add(EscapeColorGraphicsMode.codeOf(code));
+                    } else if (code < 50) {
+                        // 8-16 color mode
+                        escapeSequence.add(EscapeColor8To16Mode.codeOf(code));
+                    } else if (code >= 90 && code <= 107) {
+                        // iso color mode
+                        escapeSequence.add(EscapeColorISOMode.codeOf(code));
                     }
-                    collection.add(escapeSequence);
                 }
+                collection.add(escapeSequence);
             }
             return null;
         }).ifPresent(collection::add);
@@ -122,12 +120,13 @@ public class AnisEscapeSearchEngine {
             return null;
         }).ifPresent(collection::add);
 
+        logger.warn("collection size = {}", collection.size());
         return collection;
     }
 
     private Optional<EscapeSequence> regexParse(String text, Pattern pattern, Function<Matcher, EscapeSequence> func) {
         var matcher = pattern.matcher(text);
-        return matcher.find() ? Optional.ofNullable(func.apply(matcher)) : Optional.empty();
+        return Optional.ofNullable(func.apply(matcher));
     }
 
     private AnisEscapeSearchEngine() {

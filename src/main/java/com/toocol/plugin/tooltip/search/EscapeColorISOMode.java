@@ -3,42 +3,49 @@ package com.toocol.plugin.tooltip.search;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.toocol.plugin.tooltip.search.ColorClut.*;
+
 public enum EscapeColorISOMode implements IEscapeMode {
-    FOREGROUND_BRIGHT_BLACK(90, Black.hex),
-    FOREGROUND_BRIGHT_RED(91, Red.hex),
-    FOREGROUND_BRIGHT_GREEN(92, Green.hex),
-    FOREGROUND_BRIGHT_YELLOW(93, Yellow.hex),
-    FOREGROUND_BRIGHT_BLUE(94, Blue.hex),
-    FOREGROUND_BRIGHT_MAGENTA(95, Magenta.hex),
-    FOREGROUND_BRIGHT_CYAN(96, Cyan.hex),
-    FOREGROUND_BRIGHT_WHITE(97, White.hex),
-    BACKGROUND_BRIGHT_BLACK(100, Black.hex),
-    BACKGROUND_BRIGHT_RED(101, Red.hex),
-    BACKGROUND_BRIGHT_GREEN(102, Green.hex),
-    BACKGROUND_BRIGHT_YELLOW(103, Yellow.hex),
-    BACKGROUND_BRIGHT_BLUE(104, Blue.hex),
-    BACKGROUND_BRIGHT_MAGENTA(105, Magenta.hex),
-    BACKGROUND_BRIGHT_CYAN(106, Cyan.hex),
-    BACKGROUND_BRIGHT_WHITE(107, White.hex),
+    FOREGROUND_BRIGHT_BLACK(90, Black),
+    FOREGROUND_BRIGHT_RED(91, Red),
+    FOREGROUND_BRIGHT_GREEN(92, Green),
+    FOREGROUND_BRIGHT_YELLOW(93, Yellow),
+    FOREGROUND_BRIGHT_BLUE(94, Blue),
+    FOREGROUND_BRIGHT_MAGENTA(95, Magenta),
+    FOREGROUND_BRIGHT_CYAN(96, Cyan),
+    FOREGROUND_BRIGHT_WHITE(97, White),
+    BACKGROUND_BRIGHT_BLACK(100, Black),
+    BACKGROUND_BRIGHT_RED(101, Red),
+    BACKGROUND_BRIGHT_GREEN(102, Green),
+    BACKGROUND_BRIGHT_YELLOW(103, Yellow),
+    BACKGROUND_BRIGHT_BLUE(104, Blue),
+    BACKGROUND_BRIGHT_MAGENTA(105, Magenta),
+    BACKGROUND_BRIGHT_CYAN(106, Cyan),
+    BACKGROUND_BRIGHT_WHITE(107, White),
     ;
-    private static final Map<Integer, String> colorHexMap = new HashMap<>();
-
-    static {
-        for (EscapeColorISOMode color : values()) {
-            colorHexMap.put(color.colorCode, color.hexCode);
-        }
-    }
-
     public final int colorCode;
-    public final String hexCode;
+    public final ColorClut color;
 
-
-    EscapeColorISOMode(int colorCode, String hexCode) {
+    EscapeColorISOMode(int colorCode, ColorClut color) {
         this.colorCode = colorCode;
-        this.hexCode = hexCode;
+        this.color = color;
     }
 
-    public static String hexOf(int colorCode) {
-        return colorHexMap.get(colorCode);
+    public static EscapeColorISOMode codeOf(int code) {
+        for (EscapeColorISOMode mode : values()) {
+            if (mode.colorCode == code) {
+                return mode;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public String desc() {
+        return String.format("ESC[%dm\n" +
+                        "Set <b>%s</b> color to <b>%s</b>.\n" +
+                        "The color is set by the user, but have commonly defined meanings.\n" +
+                        "Provides bright versions of the ISO colors, without the need to use the bold modifier.",
+                colorCode, colorCode < 100 ? "foreground" : "background",  "Bright " + color.name);
     }
 }

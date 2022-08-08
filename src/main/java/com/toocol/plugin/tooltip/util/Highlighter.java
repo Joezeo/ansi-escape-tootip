@@ -29,13 +29,26 @@ public class Highlighter {
     );
 
     public HighlightInfo highlightElement(PsiElement element, EscapeSequence escapeSequence) {
-        return getHighlightInfoBuilder().range(element, escapeSequence.start, escapeSequence.end).create();
+        var builder = getHighlightInfoBuilder();
+        var strBuilder = new AnisStringBuilder();
+        strBuilder
+                .append("<h3>")
+                .append(escapeSequence.escapeSequence.replace("\\u001b", "ESC"))
+                .append("</h3>")
+                .append("<hr/>").crlf()
+                .append("contains separated escape sequences: ")
+                .append("<ul>");
+        escapeSequence.getEscapeModes().forEach(escapeMode -> strBuilder.append("<li>").append(escapeMode.tooltip()).append("</li>"));
+        strBuilder.append("</ul>");
+        builder.escapedToolTip(escapeSequence.getEscapeModes().size() == 0 ? "No such anis code sequence." : strBuilder.toString());
+        return builder
+                .range(element, escapeSequence.start, escapeSequence.end)
+                .create();
     }
 
     private HighlightInfo.Builder getHighlightInfoBuilder() {
         return HighlightInfo.newHighlightInfo(highlightElement)
-                .textAttributes(getAttributesFlyweight())
-                .descriptionAndTooltip("Hello world");
+                .textAttributes(getAttributesFlyweight());
     }
 
     private TextAttributes getAttributesFlyweight() {
@@ -45,9 +58,11 @@ public class Highlighter {
         var mix = ColorUtil.mix(background, color, color.getAlpha() / 255.0);
 
         return TextAttributes.fromFlyweight(
-                attributes.getFlyweight()
+                attributes
+                        .getFlyweight()
                         .withBackground(mix)
-                        .withForeground((ColorUtil.isDark(mix)) ? Gray._254 : Gray._1));
+                        .withForeground((ColorUtil.isDark(mix)) ? Gray._254 : Gray._1)
+        );
     }
 
     private Highlighter() {

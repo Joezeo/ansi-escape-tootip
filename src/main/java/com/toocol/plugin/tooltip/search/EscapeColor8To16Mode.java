@@ -1,7 +1,6 @@
 package com.toocol.plugin.tooltip.search;
 
-import java.util.HashMap;
-import java.util.Map;
+import static com.toocol.plugin.tooltip.search.ColorClut.*;
 
 /**
  * @author ZhaoZhe (joezane.cn@gmail.com)
@@ -9,42 +8,48 @@ import java.util.Map;
  */
 
 public enum EscapeColor8To16Mode implements IEscapeMode {
-    FOREGROUND_BLACK(30, Black.hex),
-    FOREGROUND_RED(31, Red.hex),
-    FOREGROUND_GREEN(32, Green.hex),
-    FOREGROUND_YELLOW(33, Yellow.hex),
-    FOREGROUND_BLUE(34, Blue.hex),
-    FOREGROUND_MAGENTA(35, Magenta.hex),
-    FOREGROUND_CYAN(36, Cyan.hex),
-    FOREGROUND_WHITE(37, White.hex),
-    FOREGROUND_DEFAULT(39, White.hex),
-    BACKGROUND_BLACK(40, Black.hex),
-    BACKGROUND_RED(41, Red.hex),
-    BACKGROUND_GREEN(42, Green.hex),
-    BACKGROUND_YELLOW(43, Yellow.hex),
-    BACKGROUND_BLUE(44, Blue.hex),
-    BACKGROUND_MAGENTA(45, Magenta.hex),
-    BACKGROUND_CYAN(46, Cyan.hex),
-    BACKGROUND_WHITE(47, White.hex),
-    BACKGROUND_DEFAULT(49, Black.hex),
+    FOREGROUND_BLACK(30, Black),
+    FOREGROUND_RED(31, Red),
+    FOREGROUND_GREEN(32, Green),
+    FOREGROUND_YELLOW(33, Yellow),
+    FOREGROUND_BLUE(34, Blue),
+    FOREGROUND_MAGENTA(35, Magenta),
+    FOREGROUND_CYAN(36, Cyan),
+    FOREGROUND_WHITE(37, White),
+    FOREGROUND_DEFAULT(39, White),
+    BACKGROUND_BLACK(40, Black),
+    BACKGROUND_RED(41, Red),
+    BACKGROUND_GREEN(42, Green),
+    BACKGROUND_YELLOW(43, Yellow),
+    BACKGROUND_BLUE(44, Blue),
+    BACKGROUND_MAGENTA(45, Magenta),
+    BACKGROUND_CYAN(46, Cyan),
+    BACKGROUND_WHITE(47, White),
+    BACKGROUND_DEFAULT(49, Black),
     ;
-    private static final Map<Integer, String> colorHexMap = new HashMap<>();
-
-    static {
-        for (EscapeColor8To16Mode color : values()) {
-            colorHexMap.put(color.colorCode, color.hexCode);
-        }
-    }
 
     public final int colorCode;
-    public final String hexCode;
+    public final ColorClut color;
 
-    EscapeColor8To16Mode(int colorCode, String hexCode) {
+    EscapeColor8To16Mode(int colorCode, ColorClut color) {
         this.colorCode = colorCode;
-        this.hexCode = hexCode;
+        this.color = color;
+    }
+    
+    public static EscapeColor8To16Mode codeOf(int code) {
+        for (EscapeColor8To16Mode mode : values()) {
+            if (mode.colorCode == code) {
+                return mode;
+            }
+        }
+        return null;
     }
 
-    public static String hexOf(int colorCode) {
-        return colorHexMap.get(colorCode);
+    @Override
+    public String desc() {
+        return String.format("ESC[%dm\n" +
+                        "Set <b>%s</b> color to <b>%s</b>.\n" +
+                        "The color is set by the user, but have commonly defined meanings.",
+                colorCode, colorCode < 40 ? "foreground" : "background", color.name);
     }
 }

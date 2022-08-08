@@ -274,10 +274,18 @@ public enum EscapeColor256Mode implements IEscapeMode {
     public final int colorCode;
     public final String hexCode;
     public final String rgb;
+
+    private boolean foreground = false;
+
     EscapeColor256Mode(int colorCode, String hexCode, String rgb) {
         this.colorCode = colorCode;
         this.hexCode = hexCode;
         this.rgb = rgb;
+    }
+
+    public EscapeColor256Mode setForeground(boolean foreground) {
+        this.foreground = foreground;
+        return this;
     }
 
     public static String hexOf(int colorCode) {
@@ -286,5 +294,15 @@ public enum EscapeColor256Mode implements IEscapeMode {
 
     public static String rgbOf(int colorCode) {
         return colorRgbMap.get(colorCode);
+    }
+
+    @Override
+    public String desc() {
+        return String.format("ESC[%d;5;%dm\n" +
+                        "Set <b>%s</b> color to <b>%d</b>, hexCode=<b>%s</b>, rgb=<b>%s</b>.\n" +
+                        "The color is set by the user, but have commonly defined meanings.\n" +
+                        "Provides bright versions of the ISO colors, without the need to use the bold modifier.",
+                foreground ? 38 : 48, colorCode, foreground ? "foreground" : "background", colorCode, hexCode, rgb
+        );
     }
 }
