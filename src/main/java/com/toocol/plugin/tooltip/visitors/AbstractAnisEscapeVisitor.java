@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class AbstractAnisEscapeVisitor implements HighlightVisitor {
     protected static final AnisEscapeSearchEngine escapeSearchEngine = AnisEscapeSearchEngine.get();
-    private static final Highlighter highlighter = Highlighter.get();
+    protected static final Highlighter highlighter = Highlighter.get();
 
     private HighlightInfoHolder highlightInfoHolder = null;
 
