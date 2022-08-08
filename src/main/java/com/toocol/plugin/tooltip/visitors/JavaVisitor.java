@@ -5,7 +5,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiJavaFile;
 import com.intellij.psi.util.PsiUtilCore;
-import com.toocol.plugin.tooltip.search.EscapeSequence;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +19,6 @@ import java.util.stream.Collectors;
  * @version: 0.0.1
  */
 public class JavaVisitor extends AbstractAnisEscapeVisitor {
-    private static final Logger logger = LoggerFactory.getLogger(JavaVisitor.class);
     private static final Set<String> supports = Arrays.stream(new String[]{
 //            "INTEGER_LITERAL",
             "STRING_LITERAL",
@@ -39,7 +37,7 @@ public class JavaVisitor extends AbstractAnisEscapeVisitor {
         if (!supports.contains(elementType)) {
             return;
         }
-        escapeSearchEngine.getEscapeAction(element)
+        escapeSearchEngine.getEscapeSequence(element)
                 .forEach(escapeSequence -> highlight(element, escapeSequence));
     }
 

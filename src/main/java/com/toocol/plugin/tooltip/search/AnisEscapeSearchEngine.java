@@ -6,8 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Optional;
-import java.util.function.Function;
+import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,21 +52,21 @@ public class AnisEscapeSearchEngine {
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#keyboard-strings
     private static final Pattern keyBoardStringMode = Pattern.compile("\\\\u001b\\[((\\d{1,3};)(\\d{1,3};)([\"\\w ]+;?))+p");
 
-    public synchronized Collection<EscapeSequence> getEscapeAction(PsiElement element) {
+    public synchronized Collection<EscapeSequence> getEscapeSequence(PsiElement element) {
         Collection<EscapeSequence> collection = new ArrayList<>();
         var text = element.getText();
 
         regexParse(text, cursorSetPosModePattern, matcher -> {
-            return null;
-        }).ifPresent(collection::add);
+            
+        });
 
         regexParse(text, cursorControlModePattern, matcher -> {
-            return null;
-        }).ifPresent(collection::add);
+            
+        });
 
         regexParse(text, eraseFunctionModePattern, matcher -> {
-            return null;
-        }).ifPresent(collection::add);
+            
+        });
 
         regexParse(text, colorGraphicsModePattern, matcher -> {
             while (matcher.find()) {
@@ -93,40 +92,38 @@ public class AnisEscapeSearchEngine {
                 }
                 collection.add(escapeSequence);
             }
-            return null;
-        }).ifPresent(collection::add);
+        });
 
         regexParse(text, color256ModePattern, matcher -> {
-            return null;
-        }).ifPresent(collection::add);
+            
+        });
 
         regexParse(text, colorRgbModePattern, matcher -> {
-            return null;
-        }).ifPresent(collection::add);
+            
+        });
 
         regexParse(text, screenModePatter, matcher -> {
-            return null;
-        }).ifPresent(collection::add);
+            
+        });
 
         regexParse(text, disableScreenModePattern, matcher -> {
-            return null;
-        }).ifPresent(collection::add);
+            
+        });
 
         regexParse(text, commonPrivateMode, matcher -> {
-            return null;
-        }).ifPresent(collection::add);
+            
+        });
 
         regexParse(text, keyBoardStringMode, matcher -> {
-            return null;
-        }).ifPresent(collection::add);
+            
+        });
 
         logger.warn("collection size = {}", collection.size());
         return collection;
     }
 
-    private Optional<EscapeSequence> regexParse(String text, Pattern pattern, Function<Matcher, EscapeSequence> func) {
-        var matcher = pattern.matcher(text);
-        return Optional.ofNullable(func.apply(matcher));
+    private void regexParse(String text, Pattern pattern, Consumer<Matcher> consumer) {
+        consumer.accept(pattern.matcher(text));
     }
 
     private AnisEscapeSearchEngine() {
