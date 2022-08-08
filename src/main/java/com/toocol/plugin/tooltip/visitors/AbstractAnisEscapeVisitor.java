@@ -2,7 +2,11 @@ package com.toocol.plugin.tooltip.visitors;
 
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor;
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.toocol.plugin.tooltip.util.Highlighter;
+import com.toocol.plugin.tooltip.search.AnisEscapeSearchEngine;
+import com.toocol.plugin.tooltip.search.EscapeSequence;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -11,6 +15,9 @@ import org.jetbrains.annotations.NotNull;
  * @version: 0.0.1
  */
 public abstract class AbstractAnisEscapeVisitor implements HighlightVisitor {
+    protected static final AnisEscapeSearchEngine escapeSearchEngine = AnisEscapeSearchEngine.get();
+    private static final Highlighter highlighter = Highlighter.get();
+
     private HighlightInfoHolder highlightInfoHolder = null;
 
     @NotNull
@@ -25,6 +32,10 @@ public abstract class AbstractAnisEscapeVisitor implements HighlightVisitor {
             highlightInfoHolder = null;
         }
         return true;
+    }
+
+    protected void highlight(PsiElement element, EscapeSequence escapeSequence) {
+        highlightInfoHolder.add(highlighter.highlightElement(element, escapeSequence));
     }
 
 }

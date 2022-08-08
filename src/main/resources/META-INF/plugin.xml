@@ -3,14 +3,10 @@
     <name>Anis Escape Tooltip</name>
     <vendor email="joezane.cn@gmail.com" url="https://www.toocol.com">TooCol</vendor>
 
-    <description><![CDATA[
-    The tooltip for anis escape code. <br/>
-    Extract and highlight the parsed anis-escape-code sequence from the String of the editor.</br>
-    ]]></description>
-
     <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
          on how to target different products -->
     <depends>com.intellij.modules.platform</depends>
+    <depends optional="true" config-file="withLang.xml">com.intellij.modules.lang</depends>
     <depends optional="true" config-file="withJava.xml">com.intellij.java</depends>
 
     <resource-bundle>messages.AnisEscapeTooltipBundle</resource-bundle>
@@ -21,4 +17,26 @@
         <backgroundPostStartupActivity implementation="com.toocol.plugin.tooltip.PluginUpdatesChecker"/>
     </extensions>
 
+    <description><![CDATA[
+    <div>
+      <img
+        src="https://github.com/toocol/anis-escape-tootip/blob/master/src/main/resources/META-INF/pluginIcon.png?raw=true"
+        alt="logo" width="128">
+    </div>
+    <h1>Anis Sequence Tooltip</h1>
+    The plugin for anis escape code sequence. <br/>
+    </br>
+    <h3> Features </h3>
+    <p>Highlight and tooltip the parsed anis escape code sequence from the String on the editor.</p>
+    </br>
+    <p>Currently supported files:</p>
+    <ul>
+      <li>.java</li>
+      <li>.log</li>
+      <li>.txt</li>
+    </ul>
+    <h3> Settings </h3>
+    File > Settings > Tool > Anis Escape Tooltip
+    </br>
+    ]]></description>
 </idea-plugin>

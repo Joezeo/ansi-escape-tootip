@@ -5,7 +5,7 @@ package com.toocol.plugin.tooltip.search;
  * @date: 2022/8/7 22:23
  * @version: 0.0.1
  */
-public enum EscapeCommonPrivateMode {
+public enum EscapeCommonPrivateMode implements IEscapeMode {
     CURSOR_INVISIBLE("25l", "make cursor invisible."),
     CURSOR_VISIBLE("25h", "make cursor visible."),
     RESTORE_SCREEN("47l", "restore screen."),
@@ -28,5 +28,10 @@ public enum EscapeCommonPrivateMode {
             }
         }
         return null;
+    }
+
+    @Override
+    public String desc() {
+        return desc;
     }
 }

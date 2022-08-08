@@ -4,9 +4,15 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiJavaFile;
+import com.intellij.psi.util.PsiUtilCore;
+import com.toocol.plugin.tooltip.search.EscapeSequence;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author ：JoeZane (joezane.cn@gmail.com)
@@ -15,16 +21,26 @@ import org.slf4j.LoggerFactory;
  */
 public class JavaVisitor extends AbstractAnisEscapeVisitor {
     private static final Logger logger = LoggerFactory.getLogger(JavaVisitor.class);
+    private static final Set<String> supports = Arrays.stream(new String[]{
+//            "INTEGER_LITERAL",
+            "STRING_LITERAL",
+//            "NEW_EXPRESSION",
+//            "REFERENCE_EXPRESSION"
+    }).collect(Collectors.toSet());
 
     @Override
     public boolean suitableForFile(@NotNull PsiFile file) {
-        logger.warn("suitableForFIle: " + file);
         return file instanceof PsiJavaFile;
     }
 
     @Override
     public void visit(@NotNull PsiElement element) {
-        logger.warn("visit: " + element);
+        var elementType = PsiUtilCore.getElementType(element).toString();
+        if (!supports.contains(elementType)) {
+            return;
+        }
+        escapeSearchEngine.getEscapeAction(element)
+                .forEach(escapeSequence -> highlight(element, escapeSequence));
     }
 
     @Override
