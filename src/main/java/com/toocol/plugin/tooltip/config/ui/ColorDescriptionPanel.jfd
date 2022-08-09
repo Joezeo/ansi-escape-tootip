@@ -1,0 +1,82 @@
+JFDML JFormDesigner: "7.0.7.0.1134" Java: "11.0.13" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.intellij.uiDesigner.core.GridLayoutManager ) {
+			"$columnCount": 6
+			"$rowCount": 4
+			"margin": new java.awt.Insets( 0, 10, 0, 0 )
+		} ) {
+			name: "panel"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "background"
+				"text": "Background"
+				"toolTipText": "Set the anis escape code sequence background color."
+			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+				"row": 1
+				"anchor": 8
+				"hSizePolicy": 0
+				"vSizePolicy": 0
+			} )
+			add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
+				name: "hSpacer1"
+				auxiliary() {
+					"JavaCodeGenerator.variableLocal": true
+				}
+			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+				"column": 2
+				"colSpan": 4
+				"rowSpan": 3
+				"fill": 1
+				"hSizePolicy": 6
+				"vSizePolicy": 1
+			} )
+			add( new FormComponent( "com.intellij.ui.ColorPanel" ) {
+				name: "backgroundChooser"
+			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+				"column": 1
+				"row": 1
+				"anchor": 4
+				"fill": 2
+				"hSizePolicy": 0
+				"vSizePolicy": 0
+			} )
+			add( new FormComponent( "com.jformdesigner.designer.wrapper.VSpacer" ) {
+				name: "vSpacer1"
+				auxiliary() {
+					"JavaCodeGenerator.variableLocal": true
+				}
+			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+				"row": 3
+				"colSpan": 4
+				"fill": 2
+				"hSizePolicy": 1
+				"vSizePolicy": 6
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "foreground"
+				"text": "Foreground"
+				"toolTipText": "Set the anis escape code sequence foreground color."
+			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+				"row": 2
+				"anchor": 8
+				"hSizePolicy": 0
+				"vSizePolicy": 0
+			} )
+			add( new FormComponent( "com.intellij.ui.ColorPanel" ) {
+				name: "foregroundChooser"
+			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+				"column": 1
+				"row": 2
+				"anchor": 4
+				"fill": 2
+				"hSizePolicy": 0
+				"vSizePolicy": 0
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 500, 400 )
+		} )
+	}
+}

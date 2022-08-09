@@ -12,9 +12,18 @@
     <resource-bundle>messages.AnisEscapeTooltipBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
+        <postStartupActivity implementation="com.toocol.plugin.tooltip.startup.ApplicationStartupListener"/>
+        <applicationConfigurable
+                parentId="tools"
+                instance="com.toocol.plugin.tooltip.config.home.EscapeApplicationSettingsConfigurable"
+                id="com.toocol.plugin.tooltip.config.home.EscapeApplicationSettingsConfigurable"
+                displayName="Anis Escape Tooltip"/>
+        <projectService serviceImplementation="com.toocol.plugin.tooltip.config.custom.AnisEscapeCustomSettingsConfig"/>
+
         <notificationGroup displayType="BALLOON" id="Anis Escape Sequence Tooltip Notification"/>
 
         <backgroundPostStartupActivity implementation="com.toocol.plugin.tooltip.PluginUpdatesChecker"/>
+
     </extensions>
 
     <description><![CDATA[
@@ -34,9 +43,10 @@
       <li>.java</li>
       <li>.log</li>
       <li>.txt</li>
+      <li>.rst</li>
     </ul>
     <h3> Settings </h3>
-    File > Settings > Tool > Anis Escape Tooltip
+    File > Settings > Tools > Anis Escape Tooltip
     </br>
     ]]></description>
 </idea-plugin>

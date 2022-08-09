@@ -51,7 +51,7 @@ intellij {
     type.set(properties("platformType"))
     downloadSources.set(true)
     instrumentCode.set(false)
-    updateSinceUntilBuild.set(true)
+    updateSinceUntilBuild.set(false)
 
     plugins = [
             "java",
@@ -79,6 +79,10 @@ changelog {
     keepUnreleasedSection.set(true)
     unreleasedTerm.set("[Unreleased]")
     groups = ["Features", "Fixes", "Other", "Bump"]
+}
+
+buildSearchableOptions {
+    jvmArgs '--add-exports', 'java.base/jdk.internal.vm=ALL-UNNAMED'
 }
 
 tasks {
