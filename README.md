@@ -14,8 +14,9 @@ The plugin for `anis escape code sequence`.
 <li>.java</li>
 <li>.log</li>
 <li>.txt</li>
+<li>.rst</li>
 </ul>
 <h3> Settings </h3>
-File > Settings > Tool > Anis Escape Tooltip
+File > Settings > Tools > Anis Escape Tooltip
 
 <h3> Screenshots </h3>

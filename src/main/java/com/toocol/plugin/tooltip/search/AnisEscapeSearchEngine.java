@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
  * @date: 2022/8/6 21:14
  * @version: 0.0.1
  */
+@SuppressWarnings("all")
 public class AnisEscapeSearchEngine {
     private static final Logger logger = LoggerFactory.getLogger(AnisEscapeSearchEngine.class);
     private static final AnisEscapeSearchEngine instance = new AnisEscapeSearchEngine();

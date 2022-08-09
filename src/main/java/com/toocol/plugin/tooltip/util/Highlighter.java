@@ -7,10 +7,12 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.markup.EffectType;
 import com.intellij.openapi.editor.markup.TextAttributes;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.ui.ColorUtil;
 import com.intellij.ui.Gray;
 import com.intellij.ui.JBColor;
+import com.toocol.plugin.tooltip.config.custom.AnisEscapeCustomSettingsConfig;
 import com.toocol.plugin.tooltip.search.ColorClut;
 import com.toocol.plugin.tooltip.search.EscapeSequence;
 
@@ -22,11 +24,13 @@ import java.awt.*;
  */
 @SuppressWarnings("all")
 public class Highlighter {
-    private static final Highlighter instance = new Highlighter();
+    private static Highlighter instance;
 
-    private final String[] rgb = ColorClut.grey21.rgb.split(" ");
-    private final Color myColor = new Color(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
-    private final Color color = new JBColor(myColor, myColor);
+    public static void initialize(Project project) {
+        instance = new Highlighter(project);
+    }
+
+    private final AnisEscapeCustomSettingsConfig config;
 
     public static Highlighter get() {
         return instance;
@@ -61,22 +65,20 @@ public class Highlighter {
     }
 
     private TextAttributes getAttributesFlyweight() {
-
         var attributes = new TextAttributes();
         var background = EditorColorsManager.getInstance().getGlobalScheme().getDefaultBackground();
-        var mix = ColorUtil.mix(background, color, color.getAlpha() / 255.0);
+        var mix = ColorUtil.mix(background, config.getBackgroundColor(), config.getBackgroundColor().getAlpha() / 255.0);
 
         return TextAttributes.fromFlyweight(
                 attributes
                         .getFlyweight()
                         .withEffectType(EffectType.BOXED)
                         .withBackground(mix)
-                        .withForeground(Gray._130)
-//                        .withForeground((ColorUtil.isDark(mix)) ? Gray._254 : Gray._1)
+                        .withForeground(config.getForegroundColor())
         );
     }
 
-    private Highlighter() {
-
+    private Highlighter(Project project) {
+        config = AnisEscapeCustomSettingsConfig.getSettings(project);
     }
 }

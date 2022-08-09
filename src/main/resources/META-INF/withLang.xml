@@ -1,0 +1,8 @@
+<idea-plugin>
+  <extensions defaultExtensionNs="com.intellij">
+    <highlightVisitor implementation="com.toocol.plugin.tooltip.visitors.TextVisitor"/>
+
+    <codeInsight.lineMarkerProvider language=""
+                                    implementationClass="com.toocol.plugin.tooltip.provider.InlineMarkerProvider"/>
+  </extensions>
+</idea-plugin>
