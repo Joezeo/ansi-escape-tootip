@@ -1,6 +1,8 @@
 package com.toocol.plugin.tooltip.search;
 
-enum EscapeColorGraphicsMode implements IEscapeMode {
+import java.util.Optional;
+
+public enum EscapeColorGraphicsMode implements IEscapeMode {
     SET_CURSOR_POSITION(-1, "ESC[1;34;{...}m\nSet graphics modes for cell, separated by semicolon (;)."),
     RESET_ALL_MODE(0, "ESC[0m\nReset <b>all</b> modes (styles and colors)."),
     BOLD_MODE(1, "ESC[1m\nSet <b>bold</b> mode."),
@@ -27,13 +29,13 @@ enum EscapeColorGraphicsMode implements IEscapeMode {
         this.desc = desc;
     }
 
-    public static EscapeColorGraphicsMode codeOf(int code) {
+    public static Optional<EscapeColorGraphicsMode> codeOf(int code) {
         for (EscapeColorGraphicsMode mode : values()) {
             if (mode.code == code) {
-                return mode;
+                return Optional.of(mode);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override

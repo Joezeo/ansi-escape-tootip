@@ -1,5 +1,7 @@
 package com.toocol.plugin.tooltip.search;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * @author ：JoeZane (joezane.cn@gmail.com)
  * @date: 2022/8/7 22:40
@@ -103,6 +105,29 @@ public enum KeyBoardString {
     public final String shiftCode;
     public final String ctrlCode;
     public final String altCode;
+
+    public static String keyName(String code) {
+        if (StringUtils.isEmpty(code)) {
+            return "";
+        }
+        String name = "";
+        for (KeyBoardString value : values()) {
+            if (code.equals(value.code)) {
+                name += value.key;
+                break;
+            } else if (code.equals(value.shiftCode)) {
+                name += "Shift + " + value.key;
+                break;
+            } else if (code.equals(value.ctrlCode)) {
+                name += "Ctrl + " + value.key;
+                break;
+            } else if (code.equals(value.altCode)) {
+                name += "Alt + " + value.key;
+                break;
+            }
+        }
+        return name;
+    }
 
     KeyBoardString(String key, String code, String shiftCode, String ctrlCode, String altCode) {
         this.key = key;

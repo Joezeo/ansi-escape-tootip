@@ -2,6 +2,7 @@ package com.toocol.plugin.tooltip.search;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public enum EscapeColor256Mode implements IEscapeMode {
     C_0(0, "#000000", "0 0 0"),
@@ -288,6 +289,15 @@ public enum EscapeColor256Mode implements IEscapeMode {
         return this;
     }
 
+    public static Optional<EscapeColor256Mode> codeOf(int code) {
+        for (EscapeColor256Mode mode : values()) {
+            if (mode.colorCode == code) {
+                return Optional.of(mode);
+            }
+        }
+        return Optional.empty();
+    }
+
     public static String hexOf(int colorCode) {
         return colorHexMap.get(colorCode);
     }
@@ -299,9 +309,7 @@ public enum EscapeColor256Mode implements IEscapeMode {
     @Override
     public String desc() {
         return String.format("ESC[%d;5;%dm\n" +
-                        "Set <b>%s</b> color to <b>%d</b>, hexCode=<b>%s</b>, rgb=<b>%s</b>.\n" +
-                        "The color is set by the user, but have commonly defined meanings.\n" +
-                        "Provides bright versions of the ISO colors, without the need to use the bold modifier.",
+                        "Set <b>%s</b> color to <b>%d</b>, hexCode=<b>%s</b>, rgb=<b>%s</b>.",
                 foreground ? 38 : 48, colorCode, foreground ? "foreground" : "background", colorCode, hexCode, rgb
         );
     }
