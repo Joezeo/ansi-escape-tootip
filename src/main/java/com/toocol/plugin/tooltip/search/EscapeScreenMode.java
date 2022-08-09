@@ -1,5 +1,7 @@
 package com.toocol.plugin.tooltip.search;
 
+import java.util.Optional;
+
 /**
  * @author ：JoeZane (joezane.cn@gmail.com)
  * @date: 2022/8/7 21:08
@@ -30,13 +32,13 @@ public enum EscapeScreenMode implements IEscapeMode{
         this.desc = desc;
     }
 
-    public static EscapeScreenMode codeOf(int code) {
+    public static Optional<EscapeScreenMode> codeOf(int code) {
         for (EscapeScreenMode mode : values()) {
             if (mode.code == code) {
-                return mode;
+                return Optional.of(mode);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override

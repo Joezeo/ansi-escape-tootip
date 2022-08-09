@@ -1,4 +1,4 @@
-# anis-escape-tooltip
+# Anis Escape Tooltip
 <h1 align="center">
     <img src="https://raw.githubusercontent.com/toocol/anis-escape-tootip/462c9012c7294b7e3b7ec5f5770f3f23f4d59972/src/main/resources/META-INF/pluginIcon.svg" alt="logo" width="150">
   <br>

@@ -1,7 +1,6 @@
 package com.toocol.plugin.tooltip.search;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Optional;
 
 import static com.toocol.plugin.tooltip.search.ColorClut.*;
 
@@ -31,13 +30,13 @@ public enum EscapeColorISOMode implements IEscapeMode {
         this.color = color;
     }
 
-    public static EscapeColorISOMode codeOf(int code) {
+    public static Optional<EscapeColorISOMode> codeOf(int code) {
         for (EscapeColorISOMode mode : values()) {
             if (mode.colorCode == code) {
-                return mode;
+                return Optional.of(mode);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override

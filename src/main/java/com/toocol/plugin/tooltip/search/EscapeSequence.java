@@ -12,7 +12,7 @@ public class EscapeSequence {
     public final int end;
     public final String escapeSequence;
 
-    private final Collection<IEscapeMode> escapeModes = new ArrayList<>();
+    private final Collection<String> toolTips = new ArrayList<>();
 
     public EscapeSequence(int start, int end, String escapeSequence) {
         this.start = start;
@@ -20,11 +20,11 @@ public class EscapeSequence {
         this.escapeSequence = escapeSequence;
     }
 
-    public void add(IEscapeMode mode) {
-        escapeModes.add(mode);
+    public void add(String tooltip) {
+        toolTips.add(tooltip);
     }
 
-    public Collection<IEscapeMode> getEscapeModes() {
-        return escapeModes;
+    public Collection<String> getTooltips() {
+        return toolTips;
     }
 }

@@ -12,7 +12,7 @@ public interface IEscapeMode {
 
     String desc();
 
-    default String tooltip() {
+    default String generateTooltip() {
         var desc = desc();
         var idxs = new ArrayList<Integer>();
         for (int i = 0; i < desc.length(); i++) {
@@ -20,14 +20,21 @@ public interface IEscapeMode {
                 idxs.add(i);
             }
         }
-        for (int i = 0; i < idxs.size(); i++) {
-            desc = desc.replaceFirst("#", getParam(i).toString());
+        if (idxs.size() == params.size()) {
+            for (int i = 0; i < idxs.size(); i++) {
+                desc = desc.replaceFirst("#", getParam(i).toString());
+            }
         }
+        params.clear();
         return desc;
     }
 
-    default void addParam(Object param) {
+    default IEscapeMode addParam(Object param) {
+        if (param == null) {
+            return this;
+        }
         params.add(param);
+        return this;
     }
 
     default Object getParam(int idx) {

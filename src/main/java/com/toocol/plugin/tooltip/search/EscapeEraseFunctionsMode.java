@@ -1,5 +1,7 @@
 package com.toocol.plugin.tooltip.search;
 
+import java.util.Optional;
+
 /**
  * @author ：JoeZane (joezane.cn@gmail.com)
  * @date: 2022/8/7 22:13
@@ -24,13 +26,13 @@ public enum EscapeEraseFunctionsMode implements IEscapeMode {
         this.desc = desc;
     }
 
-    public EscapeEraseFunctionsMode codeOf(String code) {
+    public static Optional<EscapeEraseFunctionsMode> codeOf(String code) {
         for (EscapeEraseFunctionsMode mode : values()) {
             if (mode.code.equals(code)) {
-                return mode;
+                return Optional.of(mode);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override
