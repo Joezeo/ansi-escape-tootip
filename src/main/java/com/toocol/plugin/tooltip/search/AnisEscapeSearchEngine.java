@@ -19,28 +19,37 @@ import java.util.regex.Pattern;
 public class AnisEscapeSearchEngine {
     private static final Logger logger = LoggerFactory.getLogger(AnisEscapeSearchEngine.class);
     private static final AnisEscapeSearchEngine instance = new AnisEscapeSearchEngine();
+
     private static final Pattern wordNumberPattern = Pattern.compile("\\w+");
     private static final Pattern numberPattern = Pattern.compile("\\d+");
     private static final Pattern wordPattern = Pattern.compile("[a-zA-Z]+");
     private static final Pattern codeStringPattern = Pattern.compile("(\\d{1,3};){1,2}[\\\\\"'\\w ]+;?");
     private static final Pattern codePattern = Pattern.compile("(\\d{1,3};)+");
     private static final Pattern stringPattern = Pattern.compile("[\\w ]+;?");
+
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#cursor-controls
     private static final Pattern cursorSetPosModePattern = Pattern.compile("\\\\u001[bB]\\[\\d{1,4};\\d{1,4}[Hf]");
     private static final Pattern cursorControlModePattern = Pattern.compile("(\\\\u001[bB]\\[\\d{0,4}[HABCDEFGsu]|(6n))|(\\\\u001[bB] [M78])");
+
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#erase-functions
     private static final Pattern eraseFunctionModePattern = Pattern.compile("\\\\u001[bB]\\[[0123]?[JK]");
+
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#colors--graphics-mode
     private static final Pattern colorGraphicsModePattern = Pattern.compile("\\\\u001[bB]\\[((?!38)(?!48)\\d{1,3};?)+m");
+
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#256-colors
     private static final Pattern color256ModePattern = Pattern.compile("\\\\u001[bB]\\[(38)?(48)?;5;\\d{1,3}m");
+
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#rgb-colors
     private static final Pattern colorRgbModePattern = Pattern.compile("\\\\u001[bB]\\[(38)?(48)?;2;\\d{1,3};\\d{1,3};\\d{1,3}m");
+
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#set-mode
     private static final Pattern screenModePatter = Pattern.compile("\\\\u001[bB]\\[=\\d{1,2}h");
     private static final Pattern disableScreenModePattern = Pattern.compile("\\\\u001[bB]\\[=\\d{1,2}l");
+
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#common-private-modes
     private static final Pattern commonPrivateModePattern = Pattern.compile("\\\\u001[bB]\\[\\?\\d{2,4}[lh]");
+
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#keyboard-strings
     private static final Pattern keyBoardStringModePattern = Pattern.compile("\\\\u001[bB]\\[((\\d{1,3};){1,2}(((\\\\\")|'|\")[\\w ]+((\\\\\")|'|\");?)|(\\d{1,2};?))+p");
 
