@@ -4,9 +4,9 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor;
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.toocol.plugin.tooltip.util.Highlighter;
 import com.toocol.plugin.tooltip.search.AnisEscapeSearchEngine;
 import com.toocol.plugin.tooltip.search.EscapeSequence;
+import com.toocol.plugin.tooltip.util.Highlighter;
 import org.jetbrains.annotations.NotNull;
 
 /**

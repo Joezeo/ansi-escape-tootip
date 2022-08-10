@@ -284,11 +284,6 @@ public enum EscapeColor256Mode implements IEscapeMode {
         this.rgb = rgb;
     }
 
-    public EscapeColor256Mode setForeground(boolean foreground) {
-        this.foreground = foreground;
-        return this;
-    }
-
     public static Optional<EscapeColor256Mode> codeOf(int code) {
         for (EscapeColor256Mode mode : values()) {
             if (mode.colorCode == code) {
@@ -306,11 +301,16 @@ public enum EscapeColor256Mode implements IEscapeMode {
         return colorRgbMap.get(colorCode);
     }
 
+    public EscapeColor256Mode setForeground(boolean foreground) {
+        this.foreground = foreground;
+        return this;
+    }
+
     @Override
     public String desc() {
         return String.format("ESC[%d;5;%dm\n" +
-                        "Set <b>%s</b> color to <b>%d</b>, hexCode=<b>%s</b>, rgb=<b>%s</b>.",
-                foreground ? 38 : 48, colorCode, foreground ? "foreground" : "background", colorCode, hexCode, rgb
+                        "Set <b>%s</b> color to <font color='%s'><b>%d</b></font>, hexCode=<font color='%s'><b>%s</b></font>, rgb=<font color='%s'><b>%s</b></font>.",
+                foreground ? 38 : 48, colorCode, foreground ? "foreground" : "background", hexCode, colorCode, hexCode, hexCode, hexCode, rgb
         );
     }
 }

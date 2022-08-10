@@ -5,8 +5,7 @@ package com.toocol.plugin.tooltip.search;
  * @date 2022/8/9 15:18
  */
 public enum EscapeColorRgbMode implements IEscapeMode {
-    COLOR_RGB_MODE
-    ;
+    COLOR_RGB_MODE;
     private boolean foreground;
 
     public EscapeColorRgbMode setForeground(boolean foreground) {
@@ -17,7 +16,7 @@ public enum EscapeColorRgbMode implements IEscapeMode {
     @Override
     public String desc() {
         return String.format("ESC[%d;2;#;#;#m\n" +
-                        "Set <b>%s</b> to rgb color <b>(#, #, #)</b>.",
+                        "Set <b>%s</b> to rgb color <font color='rgb(#,#,#)'><b>(#, #, #)</b></font>.",
                 foreground ? 38 : 48, foreground ? "foreground" : "background"
         );
     }

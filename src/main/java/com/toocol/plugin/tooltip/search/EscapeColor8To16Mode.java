@@ -37,7 +37,7 @@ public enum EscapeColor8To16Mode implements IEscapeMode {
         this.colorCode = colorCode;
         this.color = color;
     }
-    
+
     public static Optional<EscapeColor8To16Mode> codeOf(int code) {
         for (EscapeColor8To16Mode mode : values()) {
             if (mode.colorCode == code) {
@@ -50,8 +50,8 @@ public enum EscapeColor8To16Mode implements IEscapeMode {
     @Override
     public String desc() {
         return String.format("ESC[%dm\n" +
-                        "Set <b>%s</b> color to <b>%s</b>.\n" +
+                        "Set <b>%s</b> color to <font color='%s'><b>%s</b></font>.\n" +
                         "The color is set by the user, but have commonly defined meanings.",
-                colorCode, colorCode < 40 ? "foreground" : "background", color.name);
+                colorCode, colorCode < 40 ? "foreground" : "background", color.hex, color.name);
     }
 }

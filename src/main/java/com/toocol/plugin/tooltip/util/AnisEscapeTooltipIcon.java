@@ -1,4 +1,4 @@
-package com.toocol.plugin.tooltip;
+package com.toocol.plugin.tooltip.util;
 
 import com.intellij.ui.IconManager;
 

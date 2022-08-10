@@ -12,7 +12,7 @@ import com.toocol.plugin.tooltip.AnisEscapeTooltipBundle;
  */
 public class ProjectUtils {
 
-    public static IdeaPluginDescriptor getPlugin () {
+    public static IdeaPluginDescriptor getPlugin() {
         return PluginManagerCore.getPlugin(PluginId.getId("com.toocol.plugin.anisEscapeTooltip"));
     }
 

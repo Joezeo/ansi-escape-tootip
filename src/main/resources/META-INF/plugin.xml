@@ -12,7 +12,7 @@
     <resource-bundle>messages.AnisEscapeTooltipBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <postStartupActivity implementation="com.toocol.plugin.tooltip.startup.ApplicationStartupListener"/>
+        <postStartupActivity implementation="com.toocol.plugin.tooltip.listeners.ApplicationStartupListener"/>
         <applicationConfigurable
                 parentId="tools"
                 instance="com.toocol.plugin.tooltip.config.home.EscapeApplicationSettingsConfigurable"
@@ -27,16 +27,11 @@
     </extensions>
 
     <description><![CDATA[
-    <div>
-      <img
-        src="https://github.com/toocol/anis-escape-tootip/blob/master/src/main/resources/META-INF/pluginIcon.png?raw=true"
-        alt="logo" width="128">
-    </div>
-    <h1>Anis Sequence Tooltip</h1>
-    The plugin for anis escape code sequence. <br/>
+    Support for anis escape code sequence. <br/>
     </br>
     <h3> Features </h3>
-    <p>Highlight and tooltip the parsed anis escape code sequence from the String on the editor.</p>
+    <p>Highlight and tooltip the parsed anis escape code sequence</p>
+    <p>from the String on the editor.</p>
     </br>
     <p>Currently supported files:</p>
     <ul>
@@ -48,5 +43,11 @@
     <h3> Settings </h3>
     File > Settings > Tools > Anis Escape Tooltip
     </br>
+    <h3> Screenshot </h3>
+    <div>
+      <img
+        src="https://github.com/toocol/anis-escape-tootip/blob/master/src/main/resources/screenshot/screenshot.png?raw=true"
+        alt="screen shot" width="512">
+    </div>
     ]]></description>
 </idea-plugin>

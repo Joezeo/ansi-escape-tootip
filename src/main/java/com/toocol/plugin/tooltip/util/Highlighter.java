@@ -7,16 +7,10 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.markup.EffectType;
 import com.intellij.openapi.editor.markup.TextAttributes;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.ui.ColorUtil;
-import com.intellij.ui.Gray;
-import com.intellij.ui.JBColor;
 import com.toocol.plugin.tooltip.config.custom.AnisEscapeCustomSettingsConfig;
-import com.toocol.plugin.tooltip.search.ColorClut;
 import com.toocol.plugin.tooltip.search.EscapeSequence;
-
-import java.awt.*;
 
 /**
  * @author ZhaoZhe (joezane.cn@gmail.com)
@@ -24,28 +18,21 @@ import java.awt.*;
  */
 @SuppressWarnings("all")
 public class Highlighter {
-    private static Highlighter instance;
-
-    public static void initialize(Project project) {
-        instance = new Highlighter(project);
-    }
-
-    private final AnisEscapeCustomSettingsConfig config;
-
-    public static Highlighter get() {
-        return instance;
-    }
-
+    private static final Highlighter instance = new Highlighter();
     private final HighlightInfoType.HighlightInfoTypeImpl highlightElement = new HighlightInfoType.HighlightInfoTypeImpl(
             HighlightSeverity.INFORMATION,
             DefaultLanguageHighlighterColors.CONSTANT
     );
 
+    public static Highlighter get() {
+        return instance;
+    }
+
     public HighlightInfo highlightElement(PsiElement element, EscapeSequence escapeSequence) {
         var builder = getHighlightInfoBuilder();
+
         var strBuilder = new AnisStringBuilder();
-        strBuilder
-                .append("<h3>")
+        strBuilder.append("<h3>")
                 .append(escapeSequence.escapeSequence.replace("\\u001b", "ESC").replace("\\u001B", "ESC"))
                 .append("</h3>")
                 .append("<hr/>").crlf()
@@ -53,9 +40,10 @@ public class Highlighter {
                 .append("<ul>");
         escapeSequence.getTooltips().forEach(tooltip -> strBuilder.append("<li>").append(tooltip).append("</li>"));
         strBuilder.append("</ul>");
+
         builder.escapedToolTip(escapeSequence.getTooltips().size() == 0 ? "No such anis escape code sequence." : strBuilder.toString());
-        return builder
-                .range(element, escapeSequence.start, escapeSequence.end)
+
+        return builder.range(element, escapeSequence.start, escapeSequence.end)
                 .create();
     }
 
@@ -65,20 +53,18 @@ public class Highlighter {
     }
 
     private TextAttributes getAttributesFlyweight() {
+        var backgroundColor = AnisEscapeCustomSettingsConfig.backgroundColor;
+        var foregroundColor = AnisEscapeCustomSettingsConfig.foregroundColor;
         var attributes = new TextAttributes();
         var background = EditorColorsManager.getInstance().getGlobalScheme().getDefaultBackground();
-        var mix = ColorUtil.mix(background, config.getBackgroundColor(), config.getBackgroundColor().getAlpha() / 255.0);
+        var mix = ColorUtil.mix(background, backgroundColor, backgroundColor.getAlpha() / 255.0);
 
         return TextAttributes.fromFlyweight(
                 attributes
                         .getFlyweight()
                         .withEffectType(EffectType.BOXED)
                         .withBackground(mix)
-                        .withForeground(config.getForegroundColor())
+                        .withForeground(foregroundColor)
         );
-    }
-
-    private Highlighter(Project project) {
-        config = AnisEscapeCustomSettingsConfig.getSettings(project);
     }
 }

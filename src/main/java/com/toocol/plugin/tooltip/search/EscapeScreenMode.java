@@ -7,7 +7,7 @@ import java.util.Optional;
  * @date: 2022/8/7 21:08
  * @version: 0.0.1
  */
-public enum EscapeScreenMode implements IEscapeMode{
+public enum EscapeScreenMode implements IEscapeMode {
     MONOCHROME_40_25(0, "<b>40 x 25</b> monochrome (text)."),
     COLOR_4_40_25(1, "<b>40 x 25</b> color (4-color text)."),
     MONOCHROME_80_25(2, "<b>80 x 25</b> monochrome (text)."),
