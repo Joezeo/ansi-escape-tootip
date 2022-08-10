@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
  * @version: 0.0.1
  */
 public class JavaVisitor extends AbstractAnisEscapeVisitor {
-    private static final Logger log = LoggerFactory.getLogger(JavaVisitor.class);
     private static final Set<String> supports = Arrays.stream(new String[]{
             "STRING_LITERAL",
             "LITERAL_EXPRESSION"
@@ -34,7 +33,6 @@ public class JavaVisitor extends AbstractAnisEscapeVisitor {
     @Override
     public void visit(@NotNull PsiElement element) {
         var elementType = PsiUtilCore.getElementType(element).toString();
-        log.warn("Element type: {}, text = {}", elementType, element.getText());
         if (!supports.contains(elementType)) {
             return;
         }

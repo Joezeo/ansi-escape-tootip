@@ -19,11 +19,6 @@
                 id="com.toocol.plugin.tooltip.config.home.EscapeApplicationSettingsConfigurable"
                 displayName="Anis Escape Tooltip"/>
         <projectService serviceImplementation="com.toocol.plugin.tooltip.config.custom.AnisEscapeCustomSettingsConfig"/>
-
-        <notificationGroup displayType="BALLOON" id="Anis Escape Sequence Tooltip Notification"/>
-
-        <backgroundPostStartupActivity implementation="com.toocol.plugin.tooltip.PluginUpdatesChecker"/>
-
     </extensions>
 
     <description><![CDATA[
@@ -44,10 +39,15 @@
     File > Settings > Tools > Anis Escape Tooltip
     </br>
     <h3> Screenshot </h3>
-    <div>
-      <img
-        src="https://github.com/toocol/anis-escape-tootip/blob/master/src/main/resources/screenshot/screenshot.png?raw=true"
-        alt="screen shot" width="512">
-    </div>
-    ]]></description>
+    <img
+        src="https://github.com/toocol/anis-escape-tootip/blob/master/src/main/resources/screenshot/screen_shoot.png?raw=true"
+        alt="Anis Escape Tooltip" width="400" />
+    <h3>Authors:</h3>
+    <ul>
+      <li><a href="https://github.com/Joezeo">Joe Zane(Joezeo)</a></li>
+    </ul>
+    <p>If you find the plugin helpful, don't hesitate to give it <b><a href="https://plugins.jetbrains.com/plugin/19673-anis-escape-tooltip">5 stars</a></b>!</p>
+    ]]>
+    </description>
+
 </idea-plugin>

@@ -18,7 +18,15 @@ The plugin for `anis escape code sequence`.
 </ul>
 <h3> Settings </h3>
 File > Settings > Tools > Anis Escape Tooltip  
+<br>  
 
----  
+<h3> Screenshot </h3>
+<img src="https://github.com/toocol/anis-escape-tootip/blob/master/src/main/resources/screenshot/screen_shoot.png?raw=true" alt="logo" width="400">
+
+
+<h3>Authors:</h3>
+- [Joe Zane(Joezeo)](https://github.com/Joezeo)  
+
+If you find the plugin helpful, don't hesitate to give it <b><a href="https://plugins.jetbrains.com/plugin/19673-anis-escape-tooltip">5 stars</a></b>!
 
 [Plugin Home](https://plugins.jetbrains.com/plugin/19673-anis-escape-tooltip)
