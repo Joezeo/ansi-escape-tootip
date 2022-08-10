@@ -17,6 +17,8 @@ The plugin for `anis escape code sequence`.
 <li>.rst</li>
 </ul>
 <h3> Settings </h3>
-File > Settings > Tools > Anis Escape Tooltip
+File > Settings > Tools > Anis Escape Tooltip  
 
-<h3> Screenshots </h3>
+---  
+
+[Plugin Home](https://plugins.jetbrains.com/plugin/19673-anis-escape-tooltip)
