@@ -16,7 +16,7 @@ public interface IEscapeMode {
         var desc = desc();
         var idxs = new ArrayList<Integer>();
         for (int i = 0; i < desc.length(); i++) {
-            if (desc.charAt(i) == '#'){
+            if (desc.charAt(i) == '#') {
                 idxs.add(i);
             }
         }

@@ -19,43 +19,38 @@ import java.util.regex.Pattern;
 public class AnisEscapeSearchEngine {
     private static final Logger logger = LoggerFactory.getLogger(AnisEscapeSearchEngine.class);
     private static final AnisEscapeSearchEngine instance = new AnisEscapeSearchEngine();
-
-    public static AnisEscapeSearchEngine get() {
-        return instance;
-    }
-
     private static final Pattern wordNumberPattern = Pattern.compile("\\w+");
     private static final Pattern numberPattern = Pattern.compile("\\d+");
     private static final Pattern wordPattern = Pattern.compile("[a-zA-Z]+");
     private static final Pattern codeStringPattern = Pattern.compile("(\\d{1,3};){1,2}[\\\\\"'\\w ]+;?");
     private static final Pattern codePattern = Pattern.compile("(\\d{1,3};)+");
     private static final Pattern stringPattern = Pattern.compile("[\\w ]+;?");
-
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#cursor-controls
     private static final Pattern cursorSetPosModePattern = Pattern.compile("\\\\u001[bB]\\[\\d{1,4};\\d{1,4}[Hf]");
     private static final Pattern cursorControlModePattern = Pattern.compile("(\\\\u001[bB]\\[\\d{0,4}[HABCDEFGsu]|(6n))|(\\\\u001[bB] [M78])");
-
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#erase-functions
     private static final Pattern eraseFunctionModePattern = Pattern.compile("\\\\u001[bB]\\[[0123]?[JK]");
-
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#colors--graphics-mode
     private static final Pattern colorGraphicsModePattern = Pattern.compile("\\\\u001[bB]\\[((?!38)(?!48)\\d{1,3};?)+m");
-
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#256-colors
     private static final Pattern color256ModePattern = Pattern.compile("\\\\u001[bB]\\[(38)?(48)?;5;\\d{1,3}m");
-
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#rgb-colors
     private static final Pattern colorRgbModePattern = Pattern.compile("\\\\u001[bB]\\[(38)?(48)?;2;\\d{1,3};\\d{1,3};\\d{1,3}m");
-
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#set-mode
     private static final Pattern screenModePatter = Pattern.compile("\\\\u001[bB]\\[=\\d{1,2}h");
     private static final Pattern disableScreenModePattern = Pattern.compile("\\\\u001[bB]\\[=\\d{1,2}l");
-
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#common-private-modes
     private static final Pattern commonPrivateModePattern = Pattern.compile("\\\\u001[bB]\\[\\?\\d{2,4}[lh]");
-
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#keyboard-strings
     private static final Pattern keyBoardStringModePattern = Pattern.compile("\\\\u001[bB]\\[((\\d{1,3};){1,2}(((\\\\\")|'|\")[\\w ]+((\\\\\")|'|\");?)|(\\d{1,2};?))+p");
+
+    private AnisEscapeSearchEngine() {
+
+    }
+
+    public static AnisEscapeSearchEngine get() {
+        return instance;
+    }
 
     public synchronized Collection<EscapeSequence> getEscapeSequence(PsiElement element) {
         Collection<EscapeSequence> collection = new ArrayList<>();
@@ -221,6 +216,7 @@ public class AnisEscapeSearchEngine {
                             .setForeground(foreground)
                             .addParam(r).addParam(g).addParam(b)
                             .addParam(r).addParam(g).addParam(b)
+                            .addParam(r).addParam(g).addParam(b)
                             .generateTooltip()
                     );
                 } catch (Exception e) {
@@ -286,21 +282,17 @@ public class AnisEscapeSearchEngine {
                 var escapeSequence = new EscapeSequence(start, end, group);
 
                 group = group.replaceAll("\\\\u001[bB]", "");
-                logger.warn("get group {}", group);
                 var codeStringMatcher = codeStringPattern.matcher(group);
                 while (codeStringMatcher.find()) {
                     var codeString = codeStringMatcher.group(0);
-                    logger.warn("get codeString {}", codeString);
 
                     var codeMatcher = codePattern.matcher(codeString);
                     if (!codeMatcher.find()) continue;
                     var code = codeMatcher.group(0);
-                    logger.warn("get code {}", code);
 
                     var stringMatcher = stringPattern.matcher(codeString.replaceAll(code, ""));
                     if (!stringMatcher.find()) continue;
                     var string = stringMatcher.group(0);
-                    logger.warn("get string {}", string);
 
                     code = code.charAt(code.length() - 1) == ';' ? code.substring(0, code.length() - 1) : code;
                     string = string.charAt(string.length() - 1) == ';' ? string.substring(0, string.length() - 1) : string;
@@ -315,9 +307,5 @@ public class AnisEscapeSearchEngine {
 
     private void regexParse(String text, Pattern pattern, Consumer<Matcher> consumer) {
         consumer.accept(pattern.matcher(text));
-    }
-
-    private AnisEscapeSearchEngine() {
-
     }
 }

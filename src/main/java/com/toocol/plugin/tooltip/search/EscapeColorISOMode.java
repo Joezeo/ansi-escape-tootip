@@ -42,9 +42,9 @@ public enum EscapeColorISOMode implements IEscapeMode {
     @Override
     public String desc() {
         return String.format("ESC[%dm\n" +
-                        "Set <b>%s</b> color to <b>%s</b>.\n" +
+                        "Set <b>%s</b> color to <font color='%s'><b>%s</b></font>.\n" +
                         "The color is set by the user, but have commonly defined meanings.\n" +
                         "Provides bright versions of the ISO colors, without the need to use the bold modifier.",
-                colorCode, colorCode < 100 ? "foreground" : "background",  "Bright " + color.name);
+                colorCode, colorCode < 100 ? "foreground" : "background", color.hex, "Bright " + color.name);
     }
 }

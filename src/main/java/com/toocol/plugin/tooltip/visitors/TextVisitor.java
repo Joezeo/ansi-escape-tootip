@@ -3,16 +3,9 @@ package com.toocol.plugin.tooltip.visitors;
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiJavaFile;
-import com.intellij.psi.util.PsiUtilCore;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
-import java.util.Set;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * @author ：JoeZane (joezane.cn@gmail.com)

@@ -106,6 +106,14 @@ public enum KeyBoardString {
     public final String ctrlCode;
     public final String altCode;
 
+    KeyBoardString(String key, String code, String shiftCode, String ctrlCode, String altCode) {
+        this.key = key;
+        this.code = code;
+        this.shiftCode = shiftCode;
+        this.ctrlCode = ctrlCode;
+        this.altCode = altCode;
+    }
+
     public static String keyName(String code) {
         if (StringUtils.isEmpty(code)) {
             return "";
@@ -127,13 +135,5 @@ public enum KeyBoardString {
             }
         }
         return name;
-    }
-
-    KeyBoardString(String key, String code, String shiftCode, String ctrlCode, String altCode) {
-        this.key = key;
-        this.code = code;
-        this.shiftCode = shiftCode;
-        this.ctrlCode = ctrlCode;
-        this.altCode = altCode;
     }
 }

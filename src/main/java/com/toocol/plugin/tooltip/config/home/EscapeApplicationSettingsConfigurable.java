@@ -1,8 +1,11 @@
 package com.toocol.plugin.tooltip.config.home;
 
+import com.intellij.openapi.editor.colors.EditorColorsManager;
+import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SearchableConfigurable;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.NlsContexts;
 import com.toocol.plugin.tooltip.AnisEscapeTooltipBundle;
 import com.toocol.plugin.tooltip.config.custom.AnisEscapeCustomSettingsConfig;
@@ -10,8 +13,6 @@ import com.toocol.plugin.tooltip.config.ui.ColorDescriptionPanel;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 
@@ -22,15 +23,18 @@ import javax.swing.*;
  */
 @SuppressWarnings("all")
 public class EscapeApplicationSettingsConfigurable implements SearchableConfigurable {
+    private static AnisEscapeCustomSettingsConfig config;
 
-    private static final Logger logger = LoggerFactory.getLogger(EscapeApplicationSettingsConfigurable.class);
-
+    private final EditorColorsScheme editorColorsScheme;
     private ColorDescriptionPanel colorDescriptionPanel;
-    private AnisEscapeCustomSettingsConfig config;
 
-//    public EscapeApplicationSettingsConfigurable(@NotNull Project project) {
-//        config = AnisEscapeCustomSettingsConfig.getSettings(project);
-//    }
+    public EscapeApplicationSettingsConfigurable() {
+        this.editorColorsScheme = EditorColorsManager.getInstance().getGlobalScheme();
+    }
+
+    public static void initialize(@NotNull Project project) {
+        config = AnisEscapeCustomSettingsConfig.getSettings(project);
+    }
 
     @Override
     public @NlsContexts.ConfigurableName String getDisplayName() {
@@ -55,6 +59,7 @@ public class EscapeApplicationSettingsConfigurable implements SearchableConfigur
 
     @Override
     public void apply() throws ConfigurationException {
-        logger.warn("Configuarble apply!");
+        config.storeColorInfo(colorDescriptionPanel.getSelectedBackground(), colorDescriptionPanel.getSelectedForeground());
+        colorDescriptionPanel.apply(config.getAttributesDescription(), editorColorsScheme);
     }
 }

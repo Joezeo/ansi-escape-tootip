@@ -5,6 +5,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiJavaFile;
 import com.intellij.psi.util.PsiUtilCore;
+import org.apache.tools.ant.taskdefs.Java;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +20,10 @@ import java.util.stream.Collectors;
  * @version: 0.0.1
  */
 public class JavaVisitor extends AbstractAnisEscapeVisitor {
+    private static final Logger log = LoggerFactory.getLogger(JavaVisitor.class);
     private static final Set<String> supports = Arrays.stream(new String[]{
             "STRING_LITERAL",
+            "LITERAL_EXPRESSION"
     }).collect(Collectors.toSet());
 
     @Override
@@ -31,6 +34,7 @@ public class JavaVisitor extends AbstractAnisEscapeVisitor {
     @Override
     public void visit(@NotNull PsiElement element) {
         var elementType = PsiUtilCore.getElementType(element).toString();
+        log.warn("Element type: {}, text = {}", elementType, element.getText());
         if (!supports.contains(elementType)) {
             return;
         }
