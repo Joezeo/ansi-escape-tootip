@@ -20,10 +20,6 @@ The plugin for `anis escape code sequence`.
 File > Settings > Tools > Anis Escape Tooltip  
 <br>  
 
-<h3> Screenshot </h3>
-<img src="https://github.com/toocol/anis-escape-tootip/blob/master/src/main/resources/screenshot/screen_shoot_light.png?raw=true" alt="logo" width="400">
-
-
 <h3>Authors:</h3>
 <ul>
 <li><a href="https://github.com/Joezeo">Joe Zane(Joezeo)</a></li>
