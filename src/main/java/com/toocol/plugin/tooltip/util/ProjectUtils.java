@@ -3,7 +3,7 @@ package com.toocol.plugin.tooltip.util;
 import com.intellij.ide.plugins.IdeaPluginDescriptor;
 import com.intellij.ide.plugins.PluginManagerCore;
 import com.intellij.openapi.extensions.PluginId;
-import com.toocol.plugin.tooltip.AnisEscapeTooltipBundle;
+import com.toocol.plugin.tooltip.AnsiEscapeTooltipBundle;
 
 /**
  * @author ：JoeZane (joezane.cn@gmail.com)
@@ -18,7 +18,7 @@ public class ProjectUtils {
 
     public static String getVersion() {
         var plugin = getPlugin();
-        return plugin == null ? AnisEscapeTooltipBundle.get().message("plugin.version") : plugin.getVersion();
+        return plugin == null ? AnsiEscapeTooltipBundle.get().message("plugin.version") : plugin.getVersion();
     }
 
 }

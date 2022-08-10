@@ -9,7 +9,7 @@ import com.intellij.openapi.editor.markup.EffectType;
 import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.psi.PsiElement;
 import com.intellij.ui.ColorUtil;
-import com.toocol.plugin.tooltip.config.custom.AnisEscapeCustomSettingsConfig;
+import com.toocol.plugin.tooltip.config.custom.AnsiEscapeCustomSettingsConfig;
 import com.toocol.plugin.tooltip.search.EscapeSequence;
 
 /**
@@ -31,7 +31,7 @@ public class Highlighter {
     public HighlightInfo highlightElement(PsiElement element, EscapeSequence escapeSequence) {
         var builder = getHighlightInfoBuilder();
 
-        var strBuilder = new AnisStringBuilder();
+        var strBuilder = new AnsiStringBuilder();
         strBuilder.append("<h3>")
                 .append(escapeSequence.escapeSequence.replace("\\u001b", "ESC").replace("\\u001B", "ESC"))
                 .append("</h3>")
@@ -41,7 +41,7 @@ public class Highlighter {
         escapeSequence.getTooltips().forEach(tooltip -> strBuilder.append("<li>").append(tooltip).append("</li>"));
         strBuilder.append("</ul>");
 
-        builder.escapedToolTip(escapeSequence.getTooltips().size() == 0 ? "No such anis escape code sequence." : strBuilder.toString());
+        builder.escapedToolTip(escapeSequence.getTooltips().size() == 0 ? "No such ansi escape code sequence." : strBuilder.toString());
 
         return builder.range(element, escapeSequence.start, escapeSequence.end)
                 .create();
@@ -53,8 +53,8 @@ public class Highlighter {
     }
 
     private TextAttributes getAttributesFlyweight() {
-        var backgroundColor = AnisEscapeCustomSettingsConfig.backgroundColor;
-        var foregroundColor = AnisEscapeCustomSettingsConfig.foregroundColor;
+        var backgroundColor = AnsiEscapeCustomSettingsConfig.backgroundColor;
+        var foregroundColor = AnsiEscapeCustomSettingsConfig.foregroundColor;
         var attributes = new TextAttributes();
         var background = EditorColorsManager.getInstance().getGlobalScheme().getDefaultBackground();
         var mix = ColorUtil.mix(background, backgroundColor, backgroundColor.getAlpha() / 255.0);

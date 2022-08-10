@@ -21,9 +21,9 @@ import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
 
-public class AnisEscapeAttributesDescription extends TextAttributesDescription {
+public class AnsiEscapeAttributesDescription extends TextAttributesDescription {
 
-    public AnisEscapeAttributesDescription(final String name,
+    public AnsiEscapeAttributesDescription(final String name,
                                            final String group,
                                            final TextAttributes attributes,
                                            final TextAttributesKey type,

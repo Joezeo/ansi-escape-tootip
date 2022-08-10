@@ -9,8 +9,8 @@ import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.project.Project;
 import com.intellij.ui.Gray;
 import com.intellij.util.xmlb.XmlSerializerUtil;
-import com.toocol.plugin.tooltip.AnisEscapeTooltipBundle;
-import com.toocol.plugin.tooltip.config.ui.AnisEscapeAttributesDescription;
+import com.toocol.plugin.tooltip.AnsiEscapeTooltipBundle;
+import com.toocol.plugin.tooltip.config.ui.AnsiEscapeAttributesDescription;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,33 +22,33 @@ import java.awt.*;
  * @version: 0.0.1
  */
 @State(
-        name = "AnisEscapeCustomSettingsConfig",
+        name = "AnsiEscapeCustomSettingsConfig",
         storages = {
-                @Storage("anis-escape-config.xml")
+                @Storage("ansi-escape-config.xml")
         }
 )
-public class AnisEscapeCustomSettingsConfig implements PersistentStateComponent<AnisEscapeCustomSettingsConfig.PersistentState> {
+public class AnsiEscapeCustomSettingsConfig implements PersistentStateComponent<AnsiEscapeCustomSettingsConfig.PersistentState> {
     public static final Color defaultBackgroundColor = Gray._54;
     public static final Color defaultForegroundColor = Gray._130;
 
     public static Color backgroundColor = defaultBackgroundColor;
     public static Color foregroundColor = defaultForegroundColor;
 
-    private final AnisEscapeTooltipBundle bundle = AnisEscapeTooltipBundle.get();
+    private final AnsiEscapeTooltipBundle bundle = AnsiEscapeTooltipBundle.get();
 
-    public AnisEscapeAttributesDescription attributesDescription;
+    public AnsiEscapeAttributesDescription attributesDescription;
     private PersistentState persistentState;
 
-    public AnisEscapeCustomSettingsConfig() {
+    public AnsiEscapeCustomSettingsConfig() {
         setDefault();
     }
 
-    public static AnisEscapeCustomSettingsConfig getSettings(Project project) {
-        return project.getService(AnisEscapeCustomSettingsConfig.class);
+    public static AnsiEscapeCustomSettingsConfig getSettings(Project project) {
+        return project.getService(AnsiEscapeCustomSettingsConfig.class);
     }
 
     @Override
-    public @Nullable AnisEscapeCustomSettingsConfig.PersistentState getState() {
+    public @Nullable AnsiEscapeCustomSettingsConfig.PersistentState getState() {
         return persistentState;
     }
 
@@ -68,8 +68,8 @@ public class AnisEscapeCustomSettingsConfig implements PersistentStateComponent<
     public void storeColorInfo(Color backgroundColor, Color foregroundColor) {
         persistentState.storeColorInfo(backgroundColor, foregroundColor);
         updateAttributes(persistentState);
-        AnisEscapeCustomSettingsConfig.backgroundColor = persistentState.getBackgroundColor();
-        AnisEscapeCustomSettingsConfig.foregroundColor = persistentState.getForegroundColor();
+        AnsiEscapeCustomSettingsConfig.backgroundColor = persistentState.getBackgroundColor();
+        AnsiEscapeCustomSettingsConfig.foregroundColor = persistentState.getForegroundColor();
     }
 
     public void setDefault() {
@@ -87,11 +87,11 @@ public class AnisEscapeCustomSettingsConfig implements PersistentStateComponent<
         attributes.setBackgroundColor(backgroundColor);
         TextAttributesKey textAttributesKey = TextAttributesKey.createTextAttributesKey(bundle.message("settings.form.external.id"));
         String group = bundle.message("settings.form.group");
-        attributesDescription = new AnisEscapeAttributesDescription(group, group, attributes,
+        attributesDescription = new AnsiEscapeAttributesDescription(group, group, attributes,
                 textAttributesKey, EditorColorsManager.getInstance().getGlobalScheme());
     }
 
-    public AnisEscapeAttributesDescription getAttributesDescription() {
+    public AnsiEscapeAttributesDescription getAttributesDescription() {
         return attributesDescription;
     }
 

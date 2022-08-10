@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>com.toocol.plugin.anisEscapeTooltip</id>
-    <name>Anis Escape Tooltip</name>
+    <name>Ansi Escape Tooltip</name>
     <vendor email="joezane.cn@gmail.com" url="https://www.toocol.com">TooCol</vendor>
 
     <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
@@ -9,7 +9,7 @@
     <depends optional="true" config-file="withLang.xml">com.intellij.modules.lang</depends>
     <depends optional="true" config-file="withJava.xml">com.intellij.java</depends>
 
-    <resource-bundle>messages.AnisEscapeTooltipBundle</resource-bundle>
+    <resource-bundle>messages.AnsiEscapeTooltipBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
         <postStartupActivity implementation="com.toocol.plugin.tooltip.listeners.ApplicationStartupListener"/>
@@ -17,15 +17,15 @@
                 parentId="tools"
                 instance="com.toocol.plugin.tooltip.config.home.EscapeApplicationSettingsConfigurable"
                 id="com.toocol.plugin.tooltip.config.home.EscapeApplicationSettingsConfigurable"
-                displayName="Anis Escape Tooltip"/>
-        <projectService serviceImplementation="com.toocol.plugin.tooltip.config.custom.AnisEscapeCustomSettingsConfig"/>
+                displayName="Ansi Escape Tooltip"/>
+        <projectService serviceImplementation="com.toocol.plugin.tooltip.config.custom.AnsiEscapeCustomSettingsConfig"/>
     </extensions>
 
     <description><![CDATA[
-    Support for anis escape code sequence. <br/>
+    Support for ansi escape code sequence. <br/>
     </br>
     <h3> Features </h3>
-    <p>Highlight and tooltip the parsed anis escape code sequence</p>
+    <p>Highlight and tooltip the parsed ansi escape code sequence</p>
     <p>from the String on the editor.</p>
     </br>
     <p>Currently supported files:</p>
@@ -36,17 +36,17 @@
       <li>.rst</li>
     </ul>
     <h3> Settings </h3>
-    File > Settings > Tools > Anis Escape Tooltip
+    File > Settings > Tools > Ansi Escape Tooltip
     </br>
     <h3> Screenshot </h3>
     <img
-        src="https://github.com/toocol/anis-escape-tootip/blob/master/src/main/resources/screenshot/screen_shoot.png?raw=true"
-        alt="Anis Escape Tooltip" width="400" />
+        src="https://github.com/toocol/ansi-escape-tootip/blob/master/src/main/resources/screenshot/screen_shoot.png?raw=true"
+        alt="Ansi Escape Tooltip" width="400" />
     <h3>Authors:</h3>
     <ul>
       <li><a href="https://github.com/Joezeo">Joe Zane(Joezeo)</a></li>
     </ul>
-    <p>If you find the plugin helpful, don't hesitate to give it <b><a href="https://plugins.jetbrains.com/plugin/19673-anis-escape-tooltip">5 stars</a></b>!</p>
+    <p>If you find the plugin helpful, don't hesitate to give it <b><a href="https://plugins.jetbrains.com/plugin/19673-ansi-escape-tooltip">5 stars</a></b>!</p>
     ]]>
     </description>
 

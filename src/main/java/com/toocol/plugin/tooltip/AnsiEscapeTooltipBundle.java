@@ -9,15 +9,15 @@ import org.jetbrains.annotations.PropertyKey;
  * @date: 2022/8/6 20:18
  * @version: 0.0.1
  */
-public class AnisEscapeTooltipBundle extends DynamicBundle {
-    private static final String BUNDLE = "messages.AnisEscapeTooltipBundle";
-    private static final AnisEscapeTooltipBundle instance = new AnisEscapeTooltipBundle(BUNDLE);
+public class AnsiEscapeTooltipBundle extends DynamicBundle {
+    private static final String BUNDLE = "messages.AnsiEscapeTooltipBundle";
+    private static final AnsiEscapeTooltipBundle instance = new AnsiEscapeTooltipBundle(BUNDLE);
 
-    private AnisEscapeTooltipBundle(@NotNull String pathToBundle) {
+    private AnsiEscapeTooltipBundle(@NotNull String pathToBundle) {
         super(pathToBundle);
     }
 
-    public static AnisEscapeTooltipBundle get() {
+    public static AnsiEscapeTooltipBundle get() {
         return instance;
     }
 

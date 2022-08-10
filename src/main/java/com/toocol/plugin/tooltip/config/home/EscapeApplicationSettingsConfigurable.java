@@ -5,10 +5,9 @@ import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SearchableConfigurable;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.NlsContexts;
-import com.toocol.plugin.tooltip.AnisEscapeTooltipBundle;
-import com.toocol.plugin.tooltip.config.custom.AnisEscapeCustomSettingsConfig;
+import com.toocol.plugin.tooltip.AnsiEscapeTooltipBundle;
+import com.toocol.plugin.tooltip.config.custom.AnsiEscapeCustomSettingsConfig;
 import com.toocol.plugin.tooltip.config.ui.ColorDescriptionPanel;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +22,7 @@ import javax.swing.*;
  */
 @SuppressWarnings("all")
 public class EscapeApplicationSettingsConfigurable implements SearchableConfigurable {
-    private static AnisEscapeCustomSettingsConfig config;
+    private static AnsiEscapeCustomSettingsConfig config;
 
     private final EditorColorsScheme editorColorsScheme;
     private ColorDescriptionPanel colorDescriptionPanel;
@@ -33,17 +32,17 @@ public class EscapeApplicationSettingsConfigurable implements SearchableConfigur
     }
 
     public static void initialize(@NotNull Project project) {
-        config = AnisEscapeCustomSettingsConfig.getSettings(project);
+        config = AnsiEscapeCustomSettingsConfig.getSettings(project);
     }
 
     @Override
     public @NlsContexts.ConfigurableName String getDisplayName() {
-        return AnisEscapeTooltipBundle.get().message("settings.form.title");
+        return AnsiEscapeTooltipBundle.get().message("settings.form.title");
     }
 
     @Override
     public @NotNull @NonNls String getId() {
-        return AnisEscapeTooltipBundle.get().message("settings.form.configurable");
+        return AnsiEscapeTooltipBundle.get().message("settings.form.configurable");
     }
 
     @Override

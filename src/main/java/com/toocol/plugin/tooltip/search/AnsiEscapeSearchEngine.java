@@ -16,9 +16,9 @@ import java.util.regex.Pattern;
  * @version: 0.0.1
  */
 @SuppressWarnings("all")
-public class AnisEscapeSearchEngine {
-    private static final Logger logger = LoggerFactory.getLogger(AnisEscapeSearchEngine.class);
-    private static final AnisEscapeSearchEngine instance = new AnisEscapeSearchEngine();
+public class AnsiEscapeSearchEngine {
+    private static final Logger logger = LoggerFactory.getLogger(AnsiEscapeSearchEngine.class);
+    private static final AnsiEscapeSearchEngine instance = new AnsiEscapeSearchEngine();
 
     private static final Pattern wordNumberPattern = Pattern.compile("\\w+");
     private static final Pattern numberPattern = Pattern.compile("\\d+");
@@ -53,11 +53,11 @@ public class AnisEscapeSearchEngine {
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#keyboard-strings
     private static final Pattern keyBoardStringModePattern = Pattern.compile("\\\\u001[bB]\\[((\\d{1,3};){1,2}(((\\\\\")|'|\")[\\w ]+((\\\\\")|'|\");?)|(\\d{1,2};?))+p");
 
-    private AnisEscapeSearchEngine() {
+    private AnsiEscapeSearchEngine() {
 
     }
 
-    public static AnisEscapeSearchEngine get() {
+    public static AnsiEscapeSearchEngine get() {
         return instance;
     }
 

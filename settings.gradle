@@ -5,5 +5,5 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'anis-escape-tooltip'
+rootProject.name = 'ansi-escape-tooltip'
 

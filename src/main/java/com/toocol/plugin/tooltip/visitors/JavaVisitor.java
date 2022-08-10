@@ -5,10 +5,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiJavaFile;
 import com.intellij.psi.util.PsiUtilCore;
-import org.apache.tools.ant.taskdefs.Java;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -19,7 +16,7 @@ import java.util.stream.Collectors;
  * @date: 2022/8/6 19:45
  * @version: 0.0.1
  */
-public class JavaVisitor extends AbstractAnisEscapeVisitor {
+public class JavaVisitor extends AbstractAnsiEscapeVisitor {
     private static final Set<String> supports = Arrays.stream(new String[]{
             "STRING_LITERAL",
             "LITERAL_EXPRESSION"

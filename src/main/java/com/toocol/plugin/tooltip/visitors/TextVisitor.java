@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  * @date: 2022/8/6 19:45
  * @version: 0.0.1
  */
-public class TextVisitor extends AbstractAnisEscapeVisitor {
+public class TextVisitor extends AbstractAnsiEscapeVisitor {
 
     private static final Pattern filePattern = Pattern.compile(".*\\.(txt|log|rst)$");
 

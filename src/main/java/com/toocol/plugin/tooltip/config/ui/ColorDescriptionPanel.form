@@ -14,7 +14,7 @@
         </constraints>
         <properties>
           <text value="Background"/>
-          <toolTipText value="Set the anis escape code sequence background color."/>
+          <toolTipText value="Set the ansi escape code sequence background color."/>
         </properties>
       </component>
       <hspacer id="27146">
@@ -39,7 +39,7 @@
         </constraints>
         <properties>
           <text value="Foreground"/>
-          <toolTipText value="Set the anis escape code sequence foreground color."/>
+          <toolTipText value="Set the ansi escape code sequence foreground color."/>
         </properties>
       </component>
       <component id="9c10d" class="com.intellij.ui.ColorPanel" binding="foregroundChooser">

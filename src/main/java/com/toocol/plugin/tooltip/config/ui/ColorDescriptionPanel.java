@@ -10,7 +10,7 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import com.intellij.util.EventDispatcher;
 import com.intellij.util.ui.JBUI;
-import com.toocol.plugin.tooltip.config.custom.AnisEscapeCustomSettingsConfig;
+import com.toocol.plugin.tooltip.config.custom.AnsiEscapeCustomSettingsConfig;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -51,8 +51,8 @@ public class ColorDescriptionPanel extends JPanel implements OptionsPanelImpl.Co
         backgroundChooser.addActionListener(actionListener);
         foregroundChooser.addActionListener(actionListener);
 
-        backgroundChooser.setSelectedColor(AnisEscapeCustomSettingsConfig.backgroundColor);
-        foregroundChooser.setSelectedColor(AnisEscapeCustomSettingsConfig.foregroundColor);
+        backgroundChooser.setSelectedColor(AnsiEscapeCustomSettingsConfig.backgroundColor);
+        foregroundChooser.setSelectedColor(AnsiEscapeCustomSettingsConfig.foregroundColor);
     }
 
     private void createUIComponents() {
@@ -65,8 +65,8 @@ public class ColorDescriptionPanel extends JPanel implements OptionsPanelImpl.Co
 
     @Override
     public void resetDefault() {
-        backgroundChooser.setSelectedColor(AnisEscapeCustomSettingsConfig.defaultBackgroundColor);
-        foregroundChooser.setSelectedColor(AnisEscapeCustomSettingsConfig.defaultForegroundColor);
+        backgroundChooser.setSelectedColor(AnsiEscapeCustomSettingsConfig.defaultBackgroundColor);
+        foregroundChooser.setSelectedColor(AnsiEscapeCustomSettingsConfig.defaultForegroundColor);
     }
 
     @Override
@@ -127,7 +127,7 @@ public class ColorDescriptionPanel extends JPanel implements OptionsPanelImpl.Co
 
             //---- background ----
             background.setText("Background");
-            background.setToolTipText("Set the anis escape code sequence background color.");
+            background.setToolTipText("Set the ansi escape code sequence background color.");
             panel.add(background, new GridConstraints(1, 0, 1, 1,
                     GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
                     GridConstraints.SIZEPOLICY_FIXED,
@@ -151,7 +151,7 @@ public class ColorDescriptionPanel extends JPanel implements OptionsPanelImpl.Co
 
             //---- foreground ----
             foreground.setText("Foreground");
-            foreground.setToolTipText("Set the anis escape code sequence foreground color.");
+            foreground.setToolTipText("Set the ansi escape code sequence foreground color.");
             panel.add(foreground, new GridConstraints(2, 0, 1, 1,
                     GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
                     GridConstraints.SIZEPOLICY_FIXED,

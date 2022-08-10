@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author ZhaoZhe (joezane.cn@gmail.com)
  * @date 2022/4/26 19:14
  */
-public final class AnisStringBuilder {
+public final class AnsiStringBuilder {
     private final StringBuilder builder = new StringBuilder();
 
     private ColorMode colorMode = ColorMode.COLOR_256;
@@ -20,10 +20,10 @@ public final class AnisStringBuilder {
     private int ftG = -1;
     private int ftB = -1;
 
-    public AnisStringBuilder() {
+    public AnsiStringBuilder() {
     }
 
-    public AnisStringBuilder front(int color) {
+    public AnsiStringBuilder front(int color) {
         if (color < 0 || color > 255) {
             return this;
         }
@@ -32,7 +32,7 @@ public final class AnisStringBuilder {
         return this;
     }
 
-    public AnisStringBuilder background(int color) {
+    public AnsiStringBuilder background(int color) {
         if (color < 0 || color > 255) {
             return this;
         }
@@ -41,7 +41,7 @@ public final class AnisStringBuilder {
         return this;
     }
 
-    public AnisStringBuilder front(int r, int g, int b) {
+    public AnsiStringBuilder front(int r, int g, int b) {
         if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
             return this;
         }
@@ -52,7 +52,7 @@ public final class AnisStringBuilder {
         return this;
     }
 
-    public AnisStringBuilder background(int r, int g, int b) {
+    public AnsiStringBuilder background(int r, int g, int b) {
         if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
             return this;
         }
@@ -63,7 +63,7 @@ public final class AnisStringBuilder {
         return this;
     }
 
-    public AnisStringBuilder deFront() {
+    public AnsiStringBuilder deFront() {
         this.ft256 = -1;
         this.ftR = -1;
         this.ftG = -1;
@@ -71,7 +71,7 @@ public final class AnisStringBuilder {
         return this;
     }
 
-    public AnisStringBuilder deBackground() {
+    public AnsiStringBuilder deBackground() {
         this.bg256 = -1;
         this.bgR = -1;
         this.bgG = -1;
@@ -79,7 +79,7 @@ public final class AnisStringBuilder {
         return this;
     }
 
-    public AnisStringBuilder append(String str) {
+    public AnsiStringBuilder append(String str) {
         if (StringUtils.isEmpty(str)) {
             return this;
         }
@@ -87,22 +87,22 @@ public final class AnisStringBuilder {
         return this;
     }
 
-    public AnisStringBuilder append(char ch) {
+    public AnsiStringBuilder append(char ch) {
         var str = ASCIIStrCache.toString(ch);
         return append(str);
     }
 
-    public AnisStringBuilder append(int integer) {
+    public AnsiStringBuilder append(int integer) {
         var str = String.valueOf(integer);
         return append(str);
     }
 
-    public AnisStringBuilder append(long l) {
+    public AnsiStringBuilder append(long l) {
         var str = String.valueOf(l);
         return append(str);
     }
 
-    public AnisStringBuilder append(StringBuilder sb) {
+    public AnsiStringBuilder append(StringBuilder sb) {
         if (sb.length() == 0) {
             return this;
         }
@@ -110,54 +110,54 @@ public final class AnisStringBuilder {
         return append(str);
     }
 
-    public AnisStringBuilder append(AnisStringBuilder ansiSb) {
+    public AnsiStringBuilder append(AnsiStringBuilder ansiSb) {
         builder.append(ansiSb.toString());
         return this;
     }
 
-    public AnisStringBuilder bold() {
+    public AnsiStringBuilder bold() {
         builder.append("\u001b[1m");
         return this;
     }
 
-    public AnisStringBuilder italic() {
+    public AnsiStringBuilder italic() {
         builder.append("\u001b[3m");
         return this;
     }
 
-    public AnisStringBuilder resetBold() {
+    public AnsiStringBuilder resetBold() {
         builder.append("\u001b[22m");
         return this;
     }
 
-    public AnisStringBuilder resetItalic() {
+    public AnsiStringBuilder resetItalic() {
         builder.append("\u001b[23m");
         return this;
     }
 
-    public AnisStringBuilder crlf() {
+    public AnsiStringBuilder crlf() {
         builder.append("\r\n");
         return this;
     }
 
-    public AnisStringBuilder tab() {
+    public AnsiStringBuilder tab() {
         return append("\t");
     }
 
-    public AnisStringBuilder space() {
+    public AnsiStringBuilder space() {
         return append(" ");
     }
 
-    public AnisStringBuilder space(int cnt) {
+    public AnsiStringBuilder space(int cnt) {
         return append(" ".repeat(cnt));
     }
 
-    public AnisStringBuilder clearStr() {
+    public AnsiStringBuilder clearStr() {
         builder.delete(0, builder.length());
         return this;
     }
 
-    public AnisStringBuilder clearColor() {
+    public AnsiStringBuilder clearColor() {
         ft256 = -1;
         bg256 = -1;
         ftR = -1;
