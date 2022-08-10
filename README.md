@@ -25,7 +25,9 @@ File > Settings > Tools > Anis Escape Tooltip
 
 
 <h3>Authors:</h3>
-- [Joe Zane(Joezeo)](https://github.com/Joezeo)  
+<ul>
+<li><a href="https://github.com/Joezeo">Joe Zane(Joezeo)</a></li>
+</ul>
 
 If you find the plugin helpful, don't hesitate to give it <b><a href="https://plugins.jetbrains.com/plugin/19673-anis-escape-tooltip">5 stars</a></b>!
 
