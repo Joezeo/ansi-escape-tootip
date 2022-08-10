@@ -21,7 +21,7 @@ File > Settings > Tools > Anis Escape Tooltip
 <br>  
 
 <h3> Screenshot </h3>
-<img src="https://github.com/toocol/anis-escape-tootip/blob/master/src/main/resources/screenshot/screen_shoot.png?raw=true" alt="logo" width="400">
+<img src="https://github.com/toocol/anis-escape-tootip/blob/master/src/main/resources/screenshot/screen_shoot_light.png?raw=true" alt="logo" width="400">
 
 
 <h3>Authors:</h3>
