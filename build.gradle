@@ -88,7 +88,7 @@ buildSearchableOptions {
 tasks {
     patchPluginXml {
         version.set(properties("pluginVersion"))
-        sinceBuild.set("162")
+        sinceBuild.set("201")
         untilBuild.set("223.*")
 
         // Get the latest available change notes from the changelog file
