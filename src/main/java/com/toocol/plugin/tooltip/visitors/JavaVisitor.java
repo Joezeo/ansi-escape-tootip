@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
  */
 public class JavaVisitor extends AbstractAnsiEscapeVisitor {
     private static final Set<String> supports = Arrays.stream(new String[]{
-            "STRING_LITERAL",
             "LITERAL_EXPRESSION"
     }).collect(Collectors.toSet());
 
