@@ -28,30 +28,30 @@ public class AnsiEscapeSearchEngine {
     private static final Pattern stringPattern = Pattern.compile("[\\w ]+;?");
 
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#cursor-controls
-    private static final Pattern cursorSetPosModePattern = Pattern.compile("\\\\u001[bB]\\[\\d{1,4};\\d{1,4}[Hf]");
-    private static final Pattern cursorControlModePattern = Pattern.compile("(\\\\u001[bB]\\[\\d{0,4}[HABCDEFGsu]|(6n))|(\\\\u001[bB] [M78])");
+    private static final Pattern cursorSetPosModePattern = Pattern.compile("(\\\\u001[bB]|\\u001b)\\[\\d{1,4};\\d{1,4}[Hf]");
+    private static final Pattern cursorControlModePattern = Pattern.compile("((\\\\u001[bB]|\\u001b)\\[\\d{0,4}([HABCDEFGsu]|(6n)))|((\\\\u001[bB]|\\u001b) [M78])");
 
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#erase-functions
-    private static final Pattern eraseFunctionModePattern = Pattern.compile("\\\\u001[bB]\\[[0123]?[JK]");
+    private static final Pattern eraseFunctionModePattern = Pattern.compile("(\\\\u001[bB]|\\u001b)\\[[0123]?[JK]");
 
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#colors--graphics-mode
-    private static final Pattern colorGraphicsModePattern = Pattern.compile("\\\\u001[bB]\\[((?!38)(?!48)\\d{1,3};?)+m");
+    private static final Pattern colorGraphicsModePattern = Pattern.compile("(\\\\u001[bB]|\\u001b)\\[((?!38)(?!48)\\d{1,3};?)+m");
 
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#256-colors
-    private static final Pattern color256ModePattern = Pattern.compile("\\\\u001[bB]\\[(38)?(48)?;5;\\d{1,3}m");
+    private static final Pattern color256ModePattern = Pattern.compile("(\\\\u001[bB]|\\u001b)\\[(38)?(48)?;5;\\d{1,3}m");
 
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#rgb-colors
-    private static final Pattern colorRgbModePattern = Pattern.compile("\\\\u001[bB]\\[(38)?(48)?;2;\\d{1,3};\\d{1,3};\\d{1,3}m");
+    private static final Pattern colorRgbModePattern = Pattern.compile("(\\\\u001[bB]|\\u001b)\\[(38)?(48)?;2;\\d{1,3};\\d{1,3};\\d{1,3}m");
 
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#set-mode
-    private static final Pattern screenModePatter = Pattern.compile("\\\\u001[bB]\\[=\\d{1,2}h");
-    private static final Pattern disableScreenModePattern = Pattern.compile("\\\\u001[bB]\\[=\\d{1,2}l");
+    private static final Pattern screenModePatter = Pattern.compile("(\\\\u001[bB]|\\u001b)\\[=\\d{1,2}h");
+    private static final Pattern disableScreenModePattern = Pattern.compile("(\\\\u001[bB]|\\u001b)\\[=\\d{1,2}l");
 
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#common-private-modes
-    private static final Pattern commonPrivateModePattern = Pattern.compile("\\\\u001[bB]\\[\\?\\d{2,4}[lh]");
+    private static final Pattern commonPrivateModePattern = Pattern.compile("(\\\\u001[bB]|\\u001b)\\[\\?\\d{2,4}[lh]");
 
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#keyboard-strings
-    private static final Pattern keyBoardStringModePattern = Pattern.compile("\\\\u001[bB]\\[((\\d{1,3};){1,2}(((\\\\\")|'|\")[\\w ]+((\\\\\")|'|\");?)|(\\d{1,2};?))+p");
+    private static final Pattern keyBoardStringModePattern = Pattern.compile("(\\\\u001[bB]|\\u001b)\\[((\\d{1,3};){1,2}(((\\\\\")|'|\")[\\w ]+((\\\\\")|'|\");?)|(\\d{1,2};?))+p");
 
     private AnsiEscapeSearchEngine() {
 
@@ -72,7 +72,7 @@ public class AnsiEscapeSearchEngine {
                 var end = start + group.length();
                 var escapeSequence = new EscapeSequence(start, end, group);
 
-                group = group.replaceAll("\\\\u001[bB]", "");
+                group = group.replaceAll("\\\\u001[bB]", "").replaceAll("\\u001b", "");
                 var numMatcher = numberPattern.matcher(group);
                 try {
                     if (!numMatcher.find()) continue;
@@ -102,7 +102,7 @@ public class AnsiEscapeSearchEngine {
                 var end = start + group.length();
                 var escapeSequence = new EscapeSequence(start, end, group);
 
-                group = group.replaceAll("\\\\u001[bB]", "");
+                group = group.replaceAll("\\\\u001[bB]", "").replaceAll("\\u001b", "");
                 var wnMatcher = wordNumberPattern.matcher(group);
                 if (wnMatcher.find()) {
                     var code = wnMatcher.group(0);
@@ -139,7 +139,7 @@ public class AnsiEscapeSearchEngine {
                 var end = start + group.length();
                 var escapeSequence = new EscapeSequence(start, end, group);
 
-                group = group.replaceAll("\\\\u001[bB]", "");
+                group = group.replaceAll("\\\\u001[bB]", "").replaceAll("\\u001b", "");
                 Matcher wnMatcher = wordNumberPattern.matcher(group);
                 if (wnMatcher.find()) {
                     var code = wnMatcher.group(0);
@@ -156,7 +156,7 @@ public class AnsiEscapeSearchEngine {
                 var end = start + group.length();
                 var escapeSequence = new EscapeSequence(start, end, group);
 
-                group = group.replaceAll("\\\\u001[bB]", "");
+                group = group.replaceAll("\\\\u001[bB]", "").replaceAll("\\u001b", "");
                 var numMatcher = numberPattern.matcher(group);
                 while (numMatcher.find()) {
                     var code = Integer.parseInt(numMatcher.group(0));
@@ -182,7 +182,7 @@ public class AnsiEscapeSearchEngine {
                 var end = start + group.length();
                 var escapeSequence = new EscapeSequence(start, end, group);
 
-                group = group.replaceAll("\\\\u001[bB]", "");
+                group = group.replaceAll("\\\\u001[bB]", "").replaceAll("\\u001b", "");
                 var nMatcher = numberPattern.matcher(group);
                 if (!nMatcher.find()) continue;
                 var foreground = nMatcher.group(0).equals("38");
@@ -207,7 +207,7 @@ public class AnsiEscapeSearchEngine {
                 var end = start + group.length();
                 var escapeSequence = new EscapeSequence(start, end, group);
 
-                group = group.replaceAll("\\\\u001[bB]", "");
+                group = group.replaceAll("\\\\u001[bB]", "").replaceAll("\\u001b", "");
                 var nMatcher = numberPattern.matcher(group);
                 if (!nMatcher.find()) continue;
                 var foreground = nMatcher.group(0).equals("38");
@@ -242,7 +242,7 @@ public class AnsiEscapeSearchEngine {
                 var end = start + group.length();
                 var escapeSequence = new EscapeSequence(start, end, group);
 
-                group = group.replaceAll("\\\\u001[bB]", "");
+                group = group.replaceAll("\\\\u001[bB]", "").replaceAll("\\u001b", "");
                 var nMatcher = numberPattern.matcher(group);
                 if (!nMatcher.find()) continue;
                 var code = Integer.parseInt(nMatcher.group(0));
@@ -258,7 +258,7 @@ public class AnsiEscapeSearchEngine {
                 var end = start + group.length();
                 var escapeSequence = new EscapeSequence(start, end, group);
 
-                group = group.replaceAll("\\\\u001[bB]", "");
+                group = group.replaceAll("\\\\u001[bB]", "").replaceAll("\\u001b", "");
                 var nMatcher = numberPattern.matcher(group);
                 if (!nMatcher.find()) continue;
                 var code = Integer.parseInt(nMatcher.group(0));
@@ -274,7 +274,7 @@ public class AnsiEscapeSearchEngine {
                 var end = start + group.length();
                 var escapeSequence = new EscapeSequence(start, end, group);
 
-                group = group.replaceAll("\\\\u001[bB]", "");
+                group = group.replaceAll("\\\\u001[bB]", "").replaceAll("\\u001b", "");
                 var wnMatcher = wordNumberPattern.matcher(group);
                 if (!wnMatcher.find()) continue;
                 var code = wnMatcher.group(0);
@@ -290,7 +290,7 @@ public class AnsiEscapeSearchEngine {
                 var end = start + group.length();
                 var escapeSequence = new EscapeSequence(start, end, group);
 
-                group = group.replaceAll("\\\\u001[bB]", "");
+                group = group.replaceAll("\\\\u001[bB]", "").replaceAll("\\u001b", "");
                 var codeStringMatcher = codeStringPattern.matcher(group);
                 while (codeStringMatcher.find()) {
                     var codeString = codeStringMatcher.group(0);

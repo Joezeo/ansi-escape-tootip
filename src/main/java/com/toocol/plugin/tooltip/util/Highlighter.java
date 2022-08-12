@@ -33,7 +33,7 @@ public class Highlighter {
 
         var strBuilder = new AnsiStringBuilder();
         strBuilder.append("<h3>")
-                .append(escapeSequence.escapeSequence.replace("\\u001b", "ESC").replace("\\u001B", "ESC"))
+                .append(escapeSequence.escapeSequence.replace("\\u001b", "ESC").replace("\\u001B", "ESC").replace("\u001b", "ESC"))
                 .append("</h3>")
                 .append("<hr/>").crlf()
                 .append("Contains separated escape sequences: ")
