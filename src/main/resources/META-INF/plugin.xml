@@ -32,6 +32,7 @@
     <p>Currently supported files:</p>
     <ul>
       <li>.java</li>
+      <li>.kt</li>
       <li>.log</li>
       <li>.txt</li>
       <li>.rst</li>
@@ -51,4 +52,6 @@
     ]]>
     </description>
 
+    <change-notes>
+    </change-notes>
 </idea-plugin>
