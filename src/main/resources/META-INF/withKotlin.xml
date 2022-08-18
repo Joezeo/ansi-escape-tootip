@@ -1,0 +1,5 @@
+<idea-plugin>
+  <extensions defaultExtensionNs="com.intellij">
+    <highlightVisitor implementation="com.toocol.plugin.tooltip.visitors.KotlinVisitor"/>
+  </extensions>
+</idea-plugin>
