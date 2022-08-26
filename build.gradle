@@ -94,7 +94,7 @@ tasks {
         version.set(properties("pluginVersion"))
         sinceBuild.set("201")
         untilBuild.set("223.*")
-        changeNotes.set(provider { changelog.getLatest().toHTML() })
+        changeNotes.set(provider { changelog.getUnreleased().toHTML() })
     }
 
     signPlugin {

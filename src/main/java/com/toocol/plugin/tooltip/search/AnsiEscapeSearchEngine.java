@@ -53,6 +53,9 @@ public class AnsiEscapeSearchEngine {
     // see: https://gist.github.com/Joezeo/ce688cf42636376650ead73266256336#keyboard-strings
     private static final Pattern keyBoardStringModePattern = Pattern.compile("(\\\\u001[bB]|\\u001b)\\[((\\d{1,3};){1,2}(((\\\\\")|'|\")[\\w ]+((\\\\\")|'|\");?)|(\\d{1,2};?))+p");
 
+    // see: https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Definitions
+    private static final Pattern oscBelPattern = Pattern.compile("(\\\\u001[bB]|\\u001b)]\\d;.+(\\\\u0007|\\u0007)");
+
     private AnsiEscapeSearchEngine() {
 
     }
@@ -306,6 +309,27 @@ public class AnsiEscapeSearchEngine {
                     code = code.charAt(code.length() - 1) == ';' ? code.substring(0, code.length() - 1) : code;
                     string = string.charAt(string.length() - 1) == ';' ? string.substring(0, string.length() - 1) : string;
                     escapeSequence.add(EscapeKeyBoardStringMode.KEY_BOARD_STRING_MODE.setCode(code).setString(string).generateTooltip());
+                }
+                collection.add(escapeSequence);
+            }
+        });
+
+        regexParse(text, oscBelPattern, matcher -> {
+            while (matcher.find()) {
+                var group = matcher.group(0);
+                var start = element.getTextRange().getStartOffset() + matcher.start(0);
+                var end = start + group.length();
+                var escapeSequence = new EscapeSequence(start, end, group);
+
+                group = group.replaceAll("\\\\u001[bB]", "").replaceAll("\\u001b", "").replaceAll("(\\\\u0007|\\u0007)", "");
+                String[] split = group.split(";");
+                if (split.length != 2) continue;
+                try {
+                    var code = Integer.parseInt(split[0].replaceAll("]", ""));
+                    var parameter = split[1];
+                    EscapeOSCMode.codeOf(code).ifPresent(mode -> escapeSequence.add(mode.addParam(parameter).addParam(parameter).generateTooltip()));
+                } catch (Exception e) {
+                    continue;
                 }
                 collection.add(escapeSequence);
             }
